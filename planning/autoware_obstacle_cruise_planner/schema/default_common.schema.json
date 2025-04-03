@@ -3,7 +3,7 @@
   "title": "autoware_obstacle_cruise_planner parameters",
   "type": "object",
   "definitions": {
-    "deafult_common": {
+    "default_common": {
       "type": "object",
       "properties": {
         "max_vel": {
@@ -113,7 +113,7 @@
       "type": "object",
       "properties": {
         "ros__parameters": {
-          "$ref": "#/definitions/deafult_common"
+          "$ref": "#/definitions/default_common"
         }
       },
       "required": ["ros__parameters"],
