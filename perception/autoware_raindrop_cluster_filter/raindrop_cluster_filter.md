@@ -24,7 +24,7 @@ Mainly this focuses on filtering out unknown objects with very low intensity poi
 
 ## Parameters
 
-{{ json_to_markdown("perception/autoware_raindrop_cluster_filter>/schema/low_intensity_cluster_filter.schema.json") }}
+{{ json_to_markdown("perception/autoware_raindrop_cluster_filter/schema/low_intensity_cluster_filter.schema.json") }}
 
 ## Assumptions / Known limits
 
