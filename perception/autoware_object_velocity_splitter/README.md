@@ -19,4 +19,4 @@ This package can split DetectedObjects into two messages by object's speed.
 
 ### Parameters
 
--{{ json_to_markdown("perception/autoware_object_velocity_splitter/schema/object_velocity_splitter.schema.json") }}
+{{ json_to_markdown("perception/autoware_object_velocity_splitter/schema/object_velocity_splitter.schema.json") }}
