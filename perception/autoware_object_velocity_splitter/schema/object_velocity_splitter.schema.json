@@ -21,14 +21,7 @@
       "type": "object",
       "properties": {
         "ros__parameters": {
-          "type": "object",
-          "properties": {
-            "velocity_parameters": {
-              "$ref": "#/definitions/object_velocity_splitter"
-            }
-          },
-          "required": ["velocity_parameters"],
-          "additionalProperties": false
+          "$ref": "#/definitions/object_velocity_splitter"
         }
       },
       "required": ["ros__parameters"],
