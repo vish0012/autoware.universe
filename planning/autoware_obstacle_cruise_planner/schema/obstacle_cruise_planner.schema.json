@@ -95,6 +95,7 @@
                 "enable_approaching": {
                   "type": "boolean",
                   "default": false
+                  "description": ""
                 },
                 "additional_safe_distance_margin": {
                   "type": "number",
