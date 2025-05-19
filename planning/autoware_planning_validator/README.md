@@ -67,4 +67,3 @@ It outputs the following:
 ## Parameters
 
 {{ json_to_markdown("planning/autoware_planning_validator/schema/planning_validator.schema.json") }}
-
