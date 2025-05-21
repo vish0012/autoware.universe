@@ -10,6 +10,11 @@
           "type": "boolean",
           "description": "The flag for the node to switch between `sensor_msgs/Image` or `sensor_msgs/CompressedImage` as input.",
           "default": false
+        },
+        "track_buffer_length": {
+          "type": "integer",
+          "description": "The number of frames to buffer for track management.",
+          "default": 30
         }
       },
       "required": ["use_raw"],
