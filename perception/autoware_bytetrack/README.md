@@ -64,6 +64,7 @@ Kalman filter settings can be controlled by the parameters in `config/bytetrack_
 | `out/image` | `sensor_msgs/Image` | The image that detection bounding boxes and their UUIDs are drawn |
 
 ## Parameters
+
 - bytetrack
 
 {{ json_to_markdown("perception/autoware_bytetrack/schema/bytetrack.schema.json") }}
@@ -75,8 +76,6 @@ Kalman filter settings can be controlled by the parameters in `config/bytetrack_
 - bytetrack visualizer
 
 {{ json_to_markdown("perception/autoware_bytetrack/schema/bytetrack_visualizer.schema.json") }}
-
-
 
 ## Assumptions/Known limits
 
