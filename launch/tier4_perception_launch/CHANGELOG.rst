@@ -2,6 +2,110 @@
 Changelog for package tier4_perception_launch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.45.0 (2025-05-22)
+-------------------
+* Merge remote-tracking branch 'origin/main' into tmp/notbot/bump_version_base
+* feat(perception_launch): add common param path for pointpainting_fusion (`#10436 <https://github.com/autowarefoundation/autoware_universe/issues/10436>`_)
+  add common param path
+* feat(radar): update radar pipeline (`#10580 <https://github.com/autowarefoundation/autoware_universe/issues/10580>`_)
+  * fix(tier4_perception_launch): update radar filter launch configuration for improved object handling
+  * fix(autoware_simple_object_merger): change QoS settings to best effort for input subscriptions
+  * fix(autoware_simple_object_merger): change publisher QoS to reliable for output objects
+  * fix(tier4_perception_launch): remove commented-out radar filter pipeline from launch configuration
+  * style(pre-commit): autofix
+  * fix(tier4_perception_launch): remove unnecessary radar filter dependencies from package.xml
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* fix(segmentation pointcloud fusion): fix launch for selectable camera IDs (`#10609 <https://github.com/autowarefoundation/autoware_universe/issues/10609>`_)
+  * fix(tier4_perception_launch): fix segmentation_pointcloud_fusion launch
+  * chore: remove duplicated line
+  ---------
+* chore(tier4_perception_launch): enforce valid perception modes (`#10543 <https://github.com/autowarefoundation/autoware_universe/issues/10543>`_)
+  chore: using choices in the perception mode to fail on non supported modes (typos would silently fail without this)
+* feat(tier4_perception_launch): added bevfusion to the launchers (`#10541 <https://github.com/autowarefoundation/autoware_universe/issues/10541>`_)
+  * feat: added bevfusion to the launchers
+  * chore: in case that no model is selected for bevfusion, we should use bevfusion_lidar instead of bevfusion as the model, since the later does not exist
+  * chore: forgot to add the dep
+  ---------
+* feat(autoware_traffic_light_selector): new matching algorithm and unit test (`#10352 <https://github.com/autowarefoundation/autoware_universe/issues/10352>`_)
+  * refactor and test
+  * style(pre-commit): autofix
+  * add dependency
+  * unnecessary dependency
+  * chore
+  * fix typo
+  * remove change in category_merger
+  * chnage var name
+  * add validation shiftRoi
+  * add new matching algo
+  * modify unittest
+  * remove unnecessary file
+  * change type from uint8_t to int64_t
+  * change  variable name in looping
+  Co-authored-by: badai nguyen  <94814556+badai-nguyen@users.noreply.github.com>
+  * use move instead of copy
+  Co-authored-by: badai nguyen  <94814556+badai-nguyen@users.noreply.github.com>
+  * change variable name in utils
+  * apply  header file
+  * to pass cppcheck
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+  Co-authored-by: badai nguyen <94814556+badai-nguyen@users.noreply.github.com>
+* Contributors: Kenzo Lobos Tsunekawa, Masaki Baba, Masato Saeki, Taekjin LEE, TaikiYamada4, badai nguyen
+
+0.44.1 (2025-05-01)
+-------------------
+
+0.44.0 (2025-04-18)
+-------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat(perception_launch): add common param path for transfusion (`#10434 <https://github.com/autowarefoundation/autoware_universe/issues/10434>`_)
+  add common_param_path
+  Co-authored-by: Taekjin LEE <taekjin.lee@tier4.jp>
+* fix: add missing exec_depend (`#10404 <https://github.com/autowarefoundation/autoware_universe/issues/10404>`_)
+  * fix missing exec depend
+  * remove fixed depend
+  * remove the removed dependency
+  ---------
+* feat(perception_launch): add common param file (`#10396 <https://github.com/autowarefoundation/autoware_universe/issues/10396>`_)
+  add common param
+* fix: add irregular object detector pipeline (`#10369 <https://github.com/autowarefoundation/autoware_universe/issues/10369>`_)
+  * feat: add small unknown object detector pipeline
+  * chore: rename param
+  * refactor: camera lidar detector launch.xml
+  * chore: change default fusion camera ids
+  * fix: camera_lidar_detector launch
+  * fix: update rois_timestamp_offsets param name
+  * chore: pre-commit
+  * fix: spelling
+  * separete unknown pipeline
+  * style(pre-commit): autofix
+  * fix: sync param
+  * fix: change to simple object merger
+  * fix: fusion param
+  * refactor: change file name
+  * refactor: rename topic and ns
+  * chore: unify naming
+  * refactor cameara lidar merger
+  * fix: camera_lidar_radar merger
+  * style(pre-commit): autofix
+  * refactor: image_topic_name
+  * refactor: param path update
+  * fix: irregular object switch
+  * fix: missing param
+  * fix: missing param
+  * fix: move roi_pointcloud_fusion out of container
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* chore(perception): code owner revision (`#10358 <https://github.com/autowarefoundation/autoware_universe/issues/10358>`_)
+  * feat: add Masato Saeki and Taekjin Lee as maintainer to multiple package.xml files
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* fix(roi_pointcloud_fusion): merge into pointcloud container (`#10334 <https://github.com/autowarefoundation/autoware_universe/issues/10334>`_)
+* Contributors: Masaki Baba, Ryohsuke Mitsudome, Taekjin LEE, Takagi, Isamu, badai nguyen
+
 0.43.0 (2025-03-21)
 -------------------
 * Merge remote-tracking branch 'origin/main' into chore/bump-version-0.43

@@ -2,6 +2,70 @@
 Changelog for package autoware_pointcloud_preprocessor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.45.0 (2025-05-22)
+-------------------
+* Merge remote-tracking branch 'origin/main' into tmp/notbot/bump_version_base
+* fix(autoware_pointcloud_preprocessor): combine_cloud_handler always set XYZIRC (`#10617 <https://github.com/autowarefoundation/autoware_universe/issues/10617>`_)
+  always set XYZIRC
+* feat(ring_outlier_filter): update filtering parameter and process (`#10537 <https://github.com/autowarefoundation/autoware_universe/issues/10537>`_)
+* feat(autoware_pointcloud_preprocessor): templated version of the pointcloud concatenation (`#10298 <https://github.com/autowarefoundation/autoware_universe/issues/10298>`_)
+  * feat: refactored the concat into a templated design to allow cuda implementations and extend it to radars
+  * fix: moved the concat cpp for consistency and component loading
+  * chore: removed unused dep
+  * fix: missing virtual destructor
+  * fix: fixed missing dep
+  * chore: removed unused var
+  * chore: refactored the cloud handler
+  * chore: updated documentation
+  * fix: fixed rebase error
+  * chore: removed commented include
+  * chore: removed another rebase error induced print
+  * fix: and yet another rebase induced error
+  * chore: changed method name
+  * chore: removing key from dict for peace of mind
+  * chore: reimplemented latest changes in the base branch
+  * chore: missed dep
+  * chore: spell
+  * chore: removed explicit template instantiation since clang tidy reported it was being done implicitly and thus redundant
+  * chore: added documentation regarding why allocation is done right after publishing
+  * chore: replaced at for extract+mapped
+  * chore: moved format_timestamp into its own file
+  ---------
+* Contributors: Kento Yabuuchi, Kenzo Lobos Tsunekawa, Kotaro Uetake, TaikiYamada4
+
+0.44.1 (2025-05-01)
+-------------------
+
+0.44.0 (2025-04-18)
+-------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* perf(autoware_pointcloud_preprocessor): introduce managed transform buffer with implicitly defined listener type (`#9197 <https://github.com/autowarefoundation/autoware_universe/issues/9197>`_)
+  * feat(autoware_universe_utils): rework managed transform buffer
+  * feat(autoware_pointcloud_preprocessor): integrate Managed TF Buffer into pointcloud densifier
+  * chore: update repos
+  * chore(managed_transform_buffer): fix version
+  ---------
+  Co-authored-by: Kenzo Lobos-Tsunekawa <kenzo.lobos@tier4.jp>
+* fix(pointcloud_preprocessor): added missing includes (`#10412 <https://github.com/autowarefoundation/autoware_universe/issues/10412>`_)
+  fix: added missing includes
+* fix: missing dependency on tf2_sensor_msgs (`#10400 <https://github.com/autowarefoundation/autoware_universe/issues/10400>`_)
+* feat(autoware_pointcloud_preprocessor): add pointcloud_densifier package (`#10226 <https://github.com/autowarefoundation/autoware_universe/issues/10226>`_)
+  * feat(autoware_pointcloud_preprocessor): add pointcloud_densifier package
+  * style(pre-commit): autofix
+  * fix(autoware_pointcloud_preprocessor): add header
+  * fix(autoware_pointcloud_preprocessor): add schema and fix debugger
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* fix(voxel_based_compare_map): temporary fix pointcloud transform lookup  (`#10299 <https://github.com/autowarefoundation/autoware_universe/issues/10299>`_)
+  * fix(voxel_based_compare_map): temporary fix pointcloud transform lookup_time
+  * pre-commit
+  * chore: reduce timeout
+  * fix: misalignment when tranform back output
+  * fix: typo
+  ---------
+* Contributors: Amadeusz Szymko, Kaan Çolak, Kenzo Lobos Tsunekawa, Ryohsuke Mitsudome, Tim Clephas, badai nguyen
+
 0.43.0 (2025-03-21)
 -------------------
 * Merge remote-tracking branch 'origin/main' into chore/bump-version-0.43

@@ -2,6 +2,55 @@
 Changelog for package autoware_default_adapi
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.45.0 (2025-05-22)
+-------------------
+* Merge remote-tracking branch 'origin/main' into tmp/notbot/bump_version_base
+* feat(localization): replace tier4_localization_msgs used by ndt_align_srv with autoware_internal_localization_msgs (`#10567 <https://github.com/autowarefoundation/autoware_universe/issues/10567>`_)
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat(default_adapi): add state diagnostics (`#10539 <https://github.com/autowarefoundation/autoware_universe/issues/10539>`_)
+* feat(default_adapi): add mrm request api (`#10550 <https://github.com/autowarefoundation/autoware_universe/issues/10550>`_)
+* docs(default_adapi): add document of params and diags (`#10557 <https://github.com/autowarefoundation/autoware_universe/issues/10557>`_)
+  * doc(default_adapi): add document of params and diags
+  * fix cmakelists
+  ---------
+* Contributors: TaikiYamada4, Takagi, Isamu, 心刚
+
+0.44.1 (2025-05-01)
+-------------------
+
+0.44.0 (2025-04-18)
+-------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* fix: add missing exec_depend (`#10404 <https://github.com/autowarefoundation/autoware_universe/issues/10404>`_)
+  * fix missing exec depend
+  * remove fixed depend
+  * remove the removed dependency
+  ---------
+* feat(autoware_default_adapi): release adapi v1.8.0 (`#10380 <https://github.com/autowarefoundation/autoware_universe/issues/10380>`_)
+* feat: manual control (`#10354 <https://github.com/autowarefoundation/autoware_universe/issues/10354>`_)
+  * feat(default_adapi): add manual control
+  * add conversion
+  * update selector
+  * update selector depends
+  * update converter
+  * modify heartbeat name
+  * update launch
+  * update api
+  * fix pedal callback
+  * done todo
+  * apply message rename
+  * fix test
+  * fix message type and qos
+  * fix steering_tire_velocity
+  * fix for clang-tidy
+  ---------
+* feat(autoware_default_adapi): disable sample web server (`#10327 <https://github.com/autowarefoundation/autoware_universe/issues/10327>`_)
+  * feat(autoware_default_adapi): disable sample web server
+  * fix unused inport
+  ---------
+* feat(autoware_default_adapi): log autoware state change (`#10364 <https://github.com/autowarefoundation/autoware_universe/issues/10364>`_)
+* Contributors: Ryohsuke Mitsudome, Takagi, Isamu
+
 0.43.0 (2025-03-21)
 -------------------
 * Merge remote-tracking branch 'origin/main' into chore/bump-version-0.43

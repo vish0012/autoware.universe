@@ -2,6 +2,18 @@
 Changelog for package autoware_smart_mpc_trajectory_follower
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.45.0 (2025-05-22)
+-------------------
+* Merge remote-tracking branch 'origin/main' into tmp/notbot/bump_version_base
+* fix(smart_mpc): imperative mood (`#10658 <https://github.com/autowarefoundation/autoware_universe/issues/10658>`_)
+* Contributors: TaikiYamada4, Yuxuan Liu
+
+0.44.1 (2025-05-01)
+-------------------
+
+0.44.0 (2025-04-18)
+-------------------
+
 0.43.0 (2025-03-21)
 -------------------
 * Merge remote-tracking branch 'origin/main' into chore/bump-version-0.43

@@ -2,6 +2,86 @@
 Changelog for package autoware_planning_validator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.45.0 (2025-05-22)
+-------------------
+* Merge remote-tracking branch 'origin/main' into tmp/notbot/bump_version_base
+* feat(planning_validator): check for sudden shift in planning trajectory (`#10339 <https://github.com/autowarefoundation/autoware_universe/issues/10339>`_)
+  * chore(sync-files.yaml): not synchronize `github-release.yaml` (`#1776 <https://github.com/autowarefoundation/autoware_universe/issues/1776>`_)
+  not sync github-release
+  * implement function to check for sudden shift in trajectory
+  * syntax and format fixes
+  * add diagnostic for trajectory shift
+  * chore(sync-files.yaml): not synchronize `github-release.yaml` (`#1776 <https://github.com/autowarefoundation/autoware_universe/issues/1776>`_)
+  not sync github-release
+  * refactor planning validator parameters
+  * check enable flag for all validity checks
+  * add missing parameters
+  * add soft stop feature to planning validator
+  * add missing path in planning diagnostic config
+  * add debug markers and clean up code
+  * Revert "chore(sync-files.yaml): not synchronize `github-release.yaml` (`#1776 <https://github.com/autowarefoundation/autoware_universe/issues/1776>`_)"
+  This reverts commit 7badf6e90d0bb1002527c409b62db61cd8b44f37.
+  * set trajectory shift values in validation status
+  * update planning validator readme
+  * update planning validator test
+  * run pre-commit checks
+  * add missing include
+  * add unit test for trajectory shift check
+  * properly set is_critical_error\_ flag for all checks
+  * Update planning/autoware_planning_validator/include/autoware/planning_validator/parameters.hpp
+  Co-authored-by: Satoshi OTA <44889564+satoshi-ota@users.noreply.github.com>
+  * revise logic for setting longitudinal shift value
+  * fix longitudinal shift check to prevent false positive at end of path
+  * improve stop trajectory computation
+  * fix spelling
+  * fix test files
+  * fix node interface tests and pubsub tests
+  ---------
+  Co-authored-by: Yutaka Kondo <yutaka.kondo@youtalk.jp>
+  Co-authored-by: Satoshi OTA <44889564+satoshi-ota@users.noreply.github.com>
+* feat(planning_validator): add lateral jerk validation feature (`#10440 <https://github.com/autowarefoundation/autoware_universe/issues/10440>`_)
+  * feat(planning_validator): add lateral jerk validation and associated parameters
+  ---------
+* Contributors: Kyoichi Sugahara, TaikiYamada4, mkquda
+
+0.44.1 (2025-05-01)
+-------------------
+
+0.44.0 (2025-04-18)
+-------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* build(autoware_planning_validator): fix missing angles dependency (`#10479 <https://github.com/autowarefoundation/autoware_universe/issues/10479>`_)
+* refactor(planning_validator): separate validation check for steering and steering rate (`#10438 <https://github.com/autowarefoundation/autoware_universe/issues/10438>`_)
+  * feat(planning_validator): refactor steering validation parameters and add steering_rate check
+  * fix(planning_validator): enable validity checks by default and initialize parameters
+  * feat(planning_validator): add steering rate validation parameters to README
+  * feat(planning_validator): add steering rate validity checks to node options
+  ---------
+* chore(autoware_planning_validator): add new maintainers to planning_validator (`#10421 <https://github.com/autowarefoundation/autoware_universe/issues/10421>`_)
+  (autoware_planning_validator): add new maintainers to package.xml
+* fix(planning): apply THROTTLE to frequent log (`#10419 <https://github.com/autowarefoundation/autoware_universe/issues/10419>`_)
+* refactor(planning_validator): restructure planning validator configuration (`#10401 <https://github.com/autowarefoundation/autoware_universe/issues/10401>`_)
+  * refactor planning validator parameters
+  * check enable flag for all validity checks
+  * add missing parameters
+  * add debug markers and clean up code
+  * update planning validator readme
+  * update planning validator test
+  * properly set is_critical_error\_ flag for all checks
+  * Update planning/autoware_planning_validator/include/autoware/planning_validator/parameters.hpp
+  Co-authored-by: Satoshi OTA <44889564+satoshi-ota@users.noreply.github.com>
+  * run pre-commit checks
+  * fix cherry-pick errors
+  * remove unnecessary cherry-pick changes
+  ---------
+  Co-authored-by: Satoshi OTA <44889564+satoshi-ota@users.noreply.github.com>
+* feat(planning_validator): improve lateral acc calculation (`#10385 <https://github.com/autowarefoundation/autoware_universe/issues/10385>`_)
+  * feat: add functions to calculate interval distance and lateral acceleration
+  * refactor: rename array parameters to vector for clarity
+  * fix: simplify lateral acceleration calculation using std::hypot
+  ---------
+* Contributors: Esteve Fernandez, Kyoichi Sugahara, Ryohsuke Mitsudome, Takayuki Murooka, mkquda
+
 0.43.0 (2025-03-21)
 -------------------
 * Merge remote-tracking branch 'origin/main' into chore/bump-version-0.43

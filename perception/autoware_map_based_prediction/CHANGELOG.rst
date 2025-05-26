@@ -2,6 +2,24 @@
 Changelog for package autoware_map_based_prediction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.45.0 (2025-05-22)
+-------------------
+* Merge remote-tracking branch 'origin/main' into tmp/notbot/bump_version_base
+* fix(map_based_prediction): clean up an unused parameter (`#10657 <https://github.com/autowarefoundation/autoware_universe/issues/10657>`_)
+  * fix the unused parameters
+  * fix the required keys
+  ---------
+* Contributors: TaikiYamada4, Yuxuan Liu
+
+0.44.1 (2025-05-01)
+-------------------
+
+0.44.0 (2025-04-18)
+-------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* feat(map_based_prediction): add diagnostic handler to warn the processing time excess (`#10219 <https://github.com/autowarefoundation/autoware_universe/issues/10219>`_)
+* Contributors: Kotaro Uetake, Ryohsuke Mitsudome
+
 0.43.0 (2025-03-21)
 -------------------
 * Merge remote-tracking branch 'origin/main' into chore/bump-version-0.43

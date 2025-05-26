@@ -2,6 +2,38 @@
 Changelog for package autoware_behavior_path_planner
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.45.0 (2025-05-22)
+-------------------
+* Merge remote-tracking branch 'origin/main' into tmp/notbot/bump_version_base
+* fix(bpp): remove unnecessary enable_module in sampling_planner (`#7038 <https://github.com/autowarefoundation/autoware_universe/issues/7038>`_)
+* refactor(departure_checker): move lane departure checker class to departure_checker  (`#10337 <https://github.com/autowarefoundation/autoware_universe/issues/10337>`_)
+  * RT1-9640: separate lane departure checker library
+  * move back parameter
+  * separating parameters
+  * renamed to boundary departure checker
+  * pre-commit
+  * remove trajectory deviation
+  * rename namespace
+  * move boundary departure checker to common folder
+  * rename class name
+  ---------
+* Contributors: Shumpei Wakabayashi, TaikiYamada4, Zulfaqar Azmi
+
+0.44.1 (2025-05-01)
+-------------------
+
+0.44.0 (2025-04-18)
+-------------------
+* Merge remote-tracking branch 'origin/main' into humble
+* fix(behavior_path_planner, behavior_static_obstacle_avoidance_module): crash during goal changes (`#10205 <https://github.com/autowarefoundation/autoware_universe/issues/10205>`_)
+  * fix(behavior_path_planner, behavior_static_obstacle_avoidance_module): empty path handling
+  * style(pre-commit): autofix
+  * refactor: use optional
+  * fix: std
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Ryohsuke Mitsudome, Shumpei Wakabayashi
+
 0.43.0 (2025-03-21)
 -------------------
 * Merge remote-tracking branch 'origin/main' into chore/bump-version-0.43
