@@ -48,6 +48,7 @@ This feature breaks the generality of the graph and may be changed to a plugin o
 | publisher      | `/system/operation_mode/availability` | `tier4_system_msgs/msg/OperationModeAvailability` | Operation mode availability.       |
 
 ## Parameters
+
 {{ json_to_markdown("system/diagnostic_graph_aggregator/schema/default.schema.json") }}
 
 ## Examples
