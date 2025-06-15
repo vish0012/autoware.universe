@@ -31,5 +31,5 @@ The clear API is called automatically before setting the route.
 | Client       | -                  | /api/routing/change_route_points      | The route points change API.                       |
 
 ## parameters
-{{ json_to_markdown("system/autoware_default_adapi_helpers/adapi_adaptors/schema/adapi_adaptors.schema.json") }}
 
+{{ json_to_markdown("system/autoware_default_adapi_helpers/adapi_adaptors/schema/adapi_adaptors.schema.json") }}
