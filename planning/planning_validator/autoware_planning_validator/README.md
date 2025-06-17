@@ -66,7 +66,6 @@ It outputs the following:
 
 ## Parameters
 
-
 {{ json_to_markdown("planning/autoware_planning_validator/schema/planning_validator.schema.json") }}
 
 The following parameters can be set for the `autoware_planning_validator`:
@@ -181,4 +180,3 @@ The following parameters can be set for the `autoware_planning_validator`:
 | `validity_checks.trajectory_shift.forward_shift_th`  | double | max valid Longitudinal distance between two consecutive trajectories (measured at nearest point to ego) [m] | 1.0           |
 | `validity_checks.trajectory_shift.backward_shift_th` | double | min valid longitudinal distance between two consecutive trajectories (measured at nearest point to ego) [m] | 0.1           |
 | `validity_checks.trajectory_shift.is_critical`       | bool   | if true, will use handling type specified for critical checks                                               | true          |
-
