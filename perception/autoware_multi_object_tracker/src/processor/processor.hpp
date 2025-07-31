@@ -45,7 +45,10 @@ struct TrackerProcessorConfig
   float min_known_object_removal_iou;                  // ratio [0, 1]
   float min_unknown_object_removal_iou;                // ratio [0, 1]
   std::map<LabelType, int> confident_count_threshold;  // [count]
-  Eigen::MatrixXd max_dist_matrix;
+  bool enable_unknown_object_velocity_estimation;
+  bool enable_unknown_object_motion_output;
+  std::map<LabelType, double> pruning_giou_thresholds;
+  std::map<LabelType, double> pruning_distance_thresholds;  // [m]
 };
 
 class TrackerProcessor
@@ -92,8 +95,7 @@ private:
   void removeOldTracker(const rclcpp::Time & time);
   void mergeOverlappedTracker(const rclcpp::Time & time);
   bool canMergeOverlappedTarget(
-    const Tracker & target, const Tracker & other, const rclcpp::Time & time,
-    const double iou) const;
+    const Tracker & target, const Tracker & other, const rclcpp::Time & time) const;
   std::shared_ptr<Tracker> createNewTracker(
     const types::DynamicObject & object, const rclcpp::Time & time) const;
 
