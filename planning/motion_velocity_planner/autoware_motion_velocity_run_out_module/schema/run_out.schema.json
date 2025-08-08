@@ -268,11 +268,26 @@
                       "linestring_types": {
                         "type": "array",
                         "description": "types of linestrings in the vector map used to cut predicted paths",
-                        "default": "['guard_rail']"
+                        "default": "['NONE']"
                       },
                       "lanelet_subtypes": {
                         "type": "array",
                         "description": "subtypes of lanelets in the vector map used to cut predicted paths",
+                        "default": "['NONE']"
+                      },
+                      "strict_polygon_types": {
+                        "type": "array",
+                        "description": "types of polygons in the vector map used to strictly cut predicted paths",
+                        "default": "['NONE']"
+                      },
+                      "strict_linestring_types": {
+                        "type": "array",
+                        "description": "types of linestrings in the vector map used to strictly cut predicted paths",
+                        "default": "['guard_rail']"
+                      },
+                      "strict_lanelet_subtypes": {
+                        "type": "array",
+                        "description": "subtypes of lanelets in the vector map used to strictly cut predicted paths",
                         "default": "['NONE']"
                       }
                     }
@@ -304,6 +319,32 @@
               "type": "string",
               "description": "debug markers specific to each object classification labels will only be published for this one",
               "default": "PEDESTRIAN"
+            },
+            "enabled_markers": {
+              "type": "object",
+              "description": "if true, the corresponding debug markers are published",
+              "properties": {
+                "ego_footprint": {
+                  "type": "boolean",
+                  "default": "true"
+                },
+                "objects": {
+                  "type": "boolean",
+                  "default": "true"
+                },
+                "collisions": {
+                  "type": "boolean",
+                  "default": "true"
+                },
+                "decisions": {
+                  "type": "boolean",
+                  "default": "true"
+                },
+                "filtering_data": {
+                  "type": "boolean",
+                  "default": "false"
+                }
+              }
             }
           }
         }

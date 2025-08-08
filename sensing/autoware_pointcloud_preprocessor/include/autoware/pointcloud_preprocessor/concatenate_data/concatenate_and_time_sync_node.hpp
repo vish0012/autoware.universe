@@ -33,6 +33,7 @@
 
 #include <autoware_internal_debug_msgs/msg/int32_stamped.hpp>
 #include <autoware_internal_debug_msgs/msg/string_stamped.hpp>
+#include <autoware_sensing_msgs/msg/concatenated_point_cloud_info.hpp>
 #include <diagnostic_msgs/msg/diagnostic_status.hpp>
 #include <geometry_msgs/msg/twist_stamped.hpp>
 #include <geometry_msgs/msg/twist_with_covariance_stamped.hpp>
@@ -123,13 +124,15 @@ private:
 
   // publishers
   std::shared_ptr<PublisherType> concatenated_cloud_publisher_;
+  rclcpp::Publisher<autoware_sensing_msgs::msg::ConcatenatedPointCloudInfo>::SharedPtr
+    concatenation_info_publisher_;
   std::unordered_map<std::string, std::shared_ptr<PublisherType>>
     topic_to_transformed_cloud_publisher_map_;
   std::unique_ptr<autoware_utils::DebugPublisher> debug_publisher_;
 
   std::unique_ptr<autoware_utils::StopWatch<std::chrono::milliseconds>> stop_watch_ptr_;
 
-  std::unique_ptr<autoware_utils_diagnostics::DiagnosticsInterface> diagnostics_interface_;
+  std::unique_ptr<autoware_utils::DiagnosticsInterface> diagnostics_interface_;
   void publish_debug_message(
     const double processing_time, const double cyclic_time,
     const std::unordered_map<std::string, double> & topic_to_pipeline_latency_map);
