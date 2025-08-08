@@ -14,4 +14,3 @@
       - "{mode: 2001, path: /autoware/modes/emergency_stop}"
       - "{mode: 2002, path: /autoware/modes/comfortable_stop}"
       - "{mode: 2003, path: /autoware/modes/pull_over}"
-
