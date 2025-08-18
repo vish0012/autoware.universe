@@ -6,6 +6,37 @@
     "yolox_tiny": {
       "type": "object",
       "properties": {
+        "model_path": {
+          "type": "string",
+          "description": "Path to the model file (e.g., .onnx)."
+        },
+        "label_path": {
+          "type": "string",
+          "description": "Path to the labels file."
+        },
+        "color_map_path": {
+          "type": "string",
+          "description": "Path to the color map file."
+        },
+        "is_roi_overlap_segment": {
+          "type": "boolean",
+          "description": "Refine segmentation by overlaying ROI class."
+        },
+        "overlap_roi_score_threshold": {
+          "type": "number",
+          "description": "Minimum probability of detected ROI to consider for replacing segmentation."
+        },
+        "is_publish_color_mask": {
+          "type": "boolean",
+          "description": "Publish color mask for result visualization."
+        },
+        "roi_overlay_segment_label": {
+          "type": "object",
+          "description": "Enable/disable ROI overlay for specific labels.",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
         "score_threshold": {
           "type": "number",
           "description": "Threshold for object detection scores. Objects with scores below this value are ignored.",
@@ -72,6 +103,13 @@
         }
       },
       "required": [
+        "model_path",
+        "label_path",
+        "color_map_path",
+        "is_roi_overlap_segment",
+        "overlap_roi_score_threshold",
+        "is_publish_color_mask",
+        "roi_overlay_segment_label",
         "score_threshold",
         "nms_threshold",
         "precision",
