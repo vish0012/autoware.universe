@@ -11,6 +11,13 @@
           "description": "The frame count that a tracklet is considered to be lost.",
           "default": 30,
           "minimum": 1
+        },
+        "classification_decay_constant": {
+          "type": "number",
+          "description": "Decay constant for classification probability.",
+          "default": 0.95,
+          "minimum": 0.0,
+          "maximum": 1.0
         }
       },
       "required": ["track_buffer_length"],
