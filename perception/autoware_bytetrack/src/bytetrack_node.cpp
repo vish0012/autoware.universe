@@ -32,10 +32,11 @@ ByteTrackNode::ByteTrackNode(const rclcpp::NodeOptions & node_options)
 {
   using std::placeholders::_1;
   using std::chrono_literals::operator""ms;
+  int track_buffer_length = declare_parameter("track_buffer_length", 30);
+  double classification_decay_constant = declare_parameter("classification_decay_constant", 0.95);
 
-  int track_buffer_length = declare_parameter<int>("track_buffer_length");
-
-  this->bytetrack_ = std::make_unique<autoware::bytetrack::ByteTrack>(track_buffer_length);
+  this->bytetrack_ = std::make_unique<autoware::bytetrack::ByteTrack>(
+    track_buffer_length, classification_decay_constant);
 
   timer_ =
     rclcpp::create_timer(this, get_clock(), 100ms, std::bind(&ByteTrackNode::on_connect, this));
