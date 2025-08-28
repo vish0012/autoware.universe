@@ -73,19 +73,19 @@
   },
   "$ref": "#/definitions/properties",
   "required": [
-      "dt",
-      "dim_x",
-      "dim_z",
-      "q_cov_x",
-      "q_cov_y",
-      "q_cov_vx",
-      "q_cov_vy",
-      "r_cov_x",
-      "r_cov_y",
-      "p0_cov_x",
-      "p0_cov_y",
-      "p0_cov_vx",
-      "p0_cov_vy"
+    "dt",
+    "dim_x",
+    "dim_z",
+    "q_cov_x",
+    "q_cov_y",
+    "q_cov_vx",
+    "q_cov_vy",
+    "r_cov_x",
+    "r_cov_y",
+    "p0_cov_x",
+    "p0_cov_y",
+    "p0_cov_vx",
+    "p0_cov_vy"
   ],
   "additionalProperties": false
 }
