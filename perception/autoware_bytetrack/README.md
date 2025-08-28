@@ -67,7 +67,7 @@ Kalman filter settings can be controlled by the parameters in `config/bytetrack_
 
 - bytetrack
 
-{{ json_to_markdown("perception/autoware_bytetrack/schema/bytetrack.schema.json") }}
+{{ json_to_markdown("perception/autoware_bytetrack/schema/bytetrack_node.schema.json") }}
 
 - kalman filter
 
