@@ -6,13 +6,13 @@
     "bytetrack_visualizer": {
       "type": "object",
       "properties": {
-        "track_buffer_length": {
-          "type": "integer",
-          "description": "Buffer length for tracking.",
-          "default": 30
+        "use_raw": {
+          "type": "boolean",
+          "description": "The flag for the node to switch `sensor_msgs/Image` or `sensor_msgs/CompressedImage` as input",
+          "default": false
         }
       },
-      "required": ["track_buffer_length"],
+      "required": ["use_raw"],
       "additionalProperties": false
     }
   },
