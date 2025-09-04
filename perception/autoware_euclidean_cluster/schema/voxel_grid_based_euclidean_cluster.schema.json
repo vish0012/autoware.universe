@@ -50,7 +50,7 @@
           "type": "boolean",
           "description": "Use point.z for clustering.",
           "default": false
-        },
+        }
       },
       "required": [
         "tolerance",
@@ -61,7 +61,7 @@
         "max_voxel_cluster_for_output",
         "min_voxel_cluster_size_for_filtering",
         "max_points_per_voxel_in_large_cluster",
-        "use_height",
+        "use_height"
       ],
       "additionalProperties": false
     }
