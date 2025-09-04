@@ -31,51 +31,26 @@
           "description": "The maximum number of points that a cluster needs to contain in order to be considered valid.",
           "default": 3000
         },
+        "max_voxel_cluster_for_output": {
+          "type": "integer",
+          "description": "Maximum number of voxels in a cluster when outputted.",
+          "default": 800
+        },
+        "min_voxel_cluster_size_for_filtering": {
+          "type": "integer",
+          "description": "The minimum voxel cluster size for a cluster to be checked for being a large cluster.",
+          "default": 65
+        },
+        "max_points_per_voxel_in_large_cluster": {
+          "type": "integer",
+          "description": "The maximum points per voxel allowed in large clusters (used for filtering dense clusters).",
+          "default": 10
+        },
         "use_height": {
           "type": "boolean",
           "description": "Use point.z for clustering.",
           "default": false
         },
-        "input_frame": {
-          "type": "string",
-          "description": "The reference frame for input data processing.",
-          "default": "base_link"
-        },
-        "max_x": {
-          "type": "number",
-          "description": "Maximum X coordinate for the low height crop box filter.",
-          "default": 200.0
-        },
-        "min_x": {
-          "type": "number",
-          "description": "Minimum X coordinate for the low height crop box filter.",
-          "default": -200.0
-        },
-        "max_y": {
-          "type": "number",
-          "description": "Maximum Y coordinate for the low height crop box filter.",
-          "default": 200.0
-        },
-        "min_y": {
-          "type": "number",
-          "description": "Minimum Y coordinate for the low height crop box filter.",
-          "default": -200.0
-        },
-        "max_z": {
-          "type": "number",
-          "description": "Maximum Z coordinate for the low height crop box filter.",
-          "default": 2.0
-        },
-        "min_z": {
-          "type": "number",
-          "description": "Minimum Z coordinate for the low height crop box filter.",
-          "default": -10.0
-        },
-        "negative": {
-          "type": "boolean",
-          "description": "Whether to invert the crop box filtering effect.",
-          "default": false
-        }
       },
       "required": [
         "tolerance",
@@ -83,15 +58,10 @@
         "min_points_number_per_voxel",
         "min_cluster_size",
         "max_cluster_size",
+        "max_voxel_cluster_for_output",
+        "min_voxel_cluster_size_for_filtering",
+        "max_points_per_voxel_in_large_cluster",
         "use_height",
-        "input_frame",
-        "max_x",
-        "min_x",
-        "max_y",
-        "min_y",
-        "max_z",
-        "min_z",
-        "negative"
       ],
       "additionalProperties": false
     }
