@@ -32,6 +32,7 @@
 #include <autoware_utils/ros/polling_subscriber.hpp>
 #include <autoware_utils/ros/update_param.hpp>
 #include <autoware_utils/system/time_keeper.hpp>
+#include <autoware_utils_diagnostics/diagnostics_interface.hpp>
 #include <autoware_vehicle_info_utils/vehicle_info_utils.hpp>
 #include <builtin_interfaces/msg/duration.hpp>
 #include <builtin_interfaces/msg/time.hpp>
@@ -47,6 +48,7 @@
 #include <autoware_planning_msgs/msg/lanelet_route.hpp>
 #include <autoware_planning_msgs/msg/trajectory.hpp>
 #include <autoware_planning_msgs/msg/trajectory_point.hpp>
+#include <autoware_vehicle_msgs/msg/turn_indicators_command.hpp>
 #include <geometry_msgs/msg/accel_with_covariance_stamped.hpp>
 #include <geometry_msgs/msg/point.hpp>
 #include <nav_msgs/msg/odometry.hpp>
@@ -78,6 +80,7 @@ using autoware_perception_msgs::msg::TrackedObjects;
 using autoware_planning_msgs::msg::LaneletRoute;
 using autoware_planning_msgs::msg::Trajectory;
 using autoware_planning_msgs::msg::TrajectoryPoint;
+using autoware_vehicle_msgs::msg::TurnIndicatorsCommand;
 using geometry_msgs::msg::AccelWithCovarianceStamped;
 using nav_msgs::msg::Odometry;
 using HADMapBin = autoware_map_msgs::msg::LaneletMapBin;
@@ -87,7 +90,6 @@ using autoware::vehicle_info_utils::VehicleInfo;
 using builtin_interfaces::msg::Duration;
 using builtin_interfaces::msg::Time;
 using geometry_msgs::msg::Point;
-using preprocess::ColLaneIDMaps;
 using preprocess::TrafficSignalStamped;
 using rcl_interfaces::msg::SetParametersResult;
 using std_msgs::msg::ColorRGBA;
@@ -98,6 +100,7 @@ using visualization_msgs::msg::MarkerArray;
 // TensorRT
 using autoware::cuda_utils::CudaUniquePtr;
 using autoware::tensorrt_common::TrtConvCalib;
+using autoware_utils_diagnostics::DiagnosticsInterface;
 
 struct DiffusionPlannerParams
 {
@@ -112,6 +115,7 @@ struct DiffusionPlannerParams
   bool update_traffic_light_group_info;
   bool keep_last_traffic_light_group_info;
   double traffic_light_group_msg_timeout_seconds;
+  int batch_size;
 };
 struct DiffusionPlannerDebugParams
 {
@@ -160,9 +164,8 @@ struct DiffusionPlannerDebugParams
  * - ONNX Runtime members: env_, session_options_, session_, allocator_, cuda_options_.
  * - agent_data_: Optional input data for inference.
  * - params_, debug_params_, normalization_map_: Node and debug parameters, normalization info.
- * - Lanelet map and routing members: route_ptr_, lanelet_map_ptr_, routing_graph_ptr_,
- * traffic_rules_ptr_, lanelet_converter_ptr_, lane_segments_, map_lane_segments_matrix_,
- * col_id_mapping_, is_map_loaded_.
+ * - Lanelet map and routing members: route_ptr_, routing_graph_ptr_,
+ * traffic_rules_ptr_, lane_segment_context_, is_map_loaded_.
  * - ROS 2 node elements: timer_, publishers, subscriptions, and time_keeper_.
  * - generator_uuid_: Unique identifier for the planner instance.
  * - vehicle_info_: Vehicle-specific parameters.
@@ -220,6 +223,12 @@ public:
   std::vector<float> do_inference_trt(InputDataMap & input_data_map);
 
   /**
+   * @brief Get turn indicator logit from the last inference.
+   * @return Vector containing turn indicator logit.
+   */
+  std::vector<float> get_turn_indicator_logit() const;
+
+  /**
    * @brief Callback for dynamic parameter updates.
    * @param parameters Updated parameters.
    * @return Result of parameter update.
@@ -234,16 +243,16 @@ public:
 
   // preprocessing
   std::shared_ptr<RouteHandler> route_handler_{std::make_shared<RouteHandler>()};
-  std::pair<Eigen::Matrix4f, Eigen::Matrix4f> transforms_;
+  std::pair<Eigen::Matrix4d, Eigen::Matrix4d> transforms_;
   AgentData get_ego_centric_agent_data(
-    const TrackedObjects & objects, const Eigen::Matrix4f & map_to_ego_transform);
+    const TrackedObjects & objects, const Eigen::Matrix4d & map_to_ego_transform);
 
   /**
-   * @brief Create ego agent past tensor from ego history.
-   * @param map_to_ego_transform Transformation matrix from map to ego frame.
-   * @return Vector of float values representing ego agent past.
+   * @brief Replicate single sample data for batch processing.
+   * @param single_data Single sample data.
+   * @return Vector replicated for the configured batch size.
    */
-  std::vector<float> create_ego_agent_past(const Eigen::Matrix4f & map_to_ego_transform);
+  std::vector<float> replicate_for_batch(const std::vector<float> & single_data);
 
   // current state
   Odometry ego_kinematic_state_;
@@ -282,14 +291,10 @@ public:
 
   // Lanelet map
   LaneletRoute::ConstSharedPtr route_ptr_;
-  std::shared_ptr<lanelet::LaneletMap> lanelet_map_ptr_;
   std::shared_ptr<lanelet::routing::RoutingGraph> routing_graph_ptr_;
   std::shared_ptr<lanelet::traffic_rules::TrafficRules> traffic_rules_ptr_;
   std::map<lanelet::Id, TrafficSignalStamped> traffic_light_id_map_;
-  std::unique_ptr<LaneletConverter> lanelet_converter_ptr_;
-  std::vector<LaneSegment> lane_segments_;
-  Eigen::MatrixXf map_lane_segments_matrix_;
-  ColLaneIDMaps col_id_mapping_;
+  std::unique_ptr<preprocess::LaneSegmentContext> lane_segment_context_;
   bool is_map_loaded_{false};
 
   // Node elements
@@ -301,6 +306,7 @@ public:
   rclcpp::Publisher<PredictedObjects>::SharedPtr pub_objects_{nullptr};
   rclcpp::Publisher<MarkerArray>::SharedPtr pub_lane_marker_{nullptr};
   rclcpp::Publisher<MarkerArray>::SharedPtr pub_route_marker_{nullptr};
+  rclcpp::Publisher<TurnIndicatorsCommand>::SharedPtr pub_turn_indicators_{nullptr};
   mutable std::shared_ptr<autoware_utils::TimeKeeper> time_keeper_{nullptr};
   autoware_utils::InterProcessPollingSubscriber<Odometry> sub_current_odometry_{
     this, "~/input/odometry"};
@@ -320,6 +326,8 @@ public:
   rclcpp::Subscription<HADMapBin>::SharedPtr sub_map_;
   UUID generator_uuid_;
   VehicleInfo vehicle_info_;
+
+  std::unique_ptr<DiagnosticsInterface> diagnostics_inference_;
 };
 
 }  // namespace autoware::diffusion_planner
