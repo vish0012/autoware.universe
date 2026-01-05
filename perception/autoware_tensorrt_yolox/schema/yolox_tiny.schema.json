@@ -6,18 +6,6 @@
     "yolox_tiny": {
       "type": "object",
       "properties": {
-        "model_path": {
-          "type": "string",
-          "description": "Path to the model file (e.g., .onnx)."
-        },
-        "label_path": {
-          "type": "string",
-          "description": "Path to the labels file."
-        },
-        "color_map_path": {
-          "type": "string",
-          "description": "Path to the color map file."
-        },
         "is_roi_overlap_segment": {
           "type": "boolean",
           "description": "Refine segmentation by overlaying ROI class."
@@ -103,9 +91,6 @@
         }
       },
       "required": [
-        "model_path",
-        "label_path",
-        "color_map_path",
         "is_roi_overlap_segment",
         "overlap_roi_score_threshold",
         "is_publish_color_mask",
