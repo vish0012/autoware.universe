@@ -230,7 +230,7 @@ void RadarObjectsAdapter::populate_common_fields(
   output_pose.position.x = input_object.position.x;
   output_pose.position.y = input_object.position.y;
   output_pose.position.z = position_z_available_ ? input_object.position.z : default_position_z_;
-  output_pose.orientation = autoware_utils::createQuaternionFromYaw(yaw);
+  output_pose.orientation = autoware_utils::create_quaternion_from_yaw(yaw);
 
   radar_cov_to_detection_pose_cov(
     input_object.position_covariance, input_object.orientation_std,
