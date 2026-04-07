@@ -14,7 +14,7 @@
 
 #include "bbox_object_locator_node.hpp"
 
-#include <autoware/universe_utils/geometry/geometry.hpp>
+#include <autoware_utils_geometry/msg/covariance.hpp>
 #include <autoware_utils_math/unit_conversion.hpp>
 #include <rclcpp/qos.hpp>
 #include <tf2_eigen/tf2_eigen.hpp>
@@ -32,7 +32,7 @@
 
 namespace autoware::image_object_locator
 {
-using autoware::universe_utils::xyzrpy_covariance_index::XYZRPY_COV_IDX;
+using autoware_utils_geometry::xyzrpy_covariance_index::XYZRPY_COV_IDX;
 using autoware_utils_math::deg2rad;
 
 void transformToRT(const geometry_msgs::msg::TransformStamped & tf, cv::Matx33d & R, cv::Vec3d & t)

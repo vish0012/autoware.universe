@@ -166,7 +166,7 @@ DecorativeTrackerMergerNode::DecorativeTrackerMergerNode(const rclcpp::NodeOptio
   published_time_publisher_ = std::make_unique<autoware_utils::PublishedTimePublisher>(this);
 
   // diagnostics
-  diagnostics_interface_ptr_ = std::make_unique<autoware::universe_utils::DiagnosticsInterface>(
+  diagnostics_interface_ptr_ = std::make_unique<autoware_utils_diagnostics::DiagnosticsInterface>(
     this, "decorative_object_merger_node");
   stop_watch_ptr_->tic("delay_main_objects");
   stop_watch_ptr_->tic("duration_empty_main_objects");

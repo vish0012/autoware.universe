@@ -23,7 +23,7 @@
 #include "autoware/bevfusion/visibility_control.hpp"
 
 #include <Eigen/Core>
-#include <autoware/universe_utils/system/stop_watch.hpp>
+#include <autoware_utils_system/stop_watch.hpp>
 #include <autoware_utils/ros/debug_publisher.hpp>
 #include <autoware_utils/ros/diagnostics_interface.hpp>
 #include <autoware_utils/ros/published_time_publisher.hpp>
@@ -140,7 +140,7 @@ private:
   std::unique_ptr<autoware_utils::DiagnosticsInterface> diagnostics_detector_trt_;
 
   // debugger
-  std::unique_ptr<autoware_utils::StopWatch<std::chrono::milliseconds>> stop_watch_ptr_{nullptr};
+  std::unique_ptr<autoware_utils_system::StopWatch<std::chrono::milliseconds>> stop_watch_ptr_{nullptr};
   std::unique_ptr<autoware_utils::DebugPublisher> debug_publisher_ptr_{nullptr};
   std::unique_ptr<autoware_utils::PublishedTimePublisher> published_time_pub_{nullptr};
 };

@@ -18,7 +18,7 @@
 #include "autoware/tracking_object_merger/association/data_association.hpp"
 #include "autoware/tracking_object_merger/utils/tracker_state.hpp"
 #include "autoware/tracking_object_merger/utils/utils.hpp"
-#include "autoware/universe_utils/ros/diagnostics_interface.hpp"
+#include "autoware_utils_diagnostics/diagnostics_interface.hpp"
 #include "autoware_utils/ros/debug_publisher.hpp"
 #include "autoware_utils/ros/published_time_publisher.hpp"
 #include "autoware_utils/system/stop_watch.hpp"
@@ -128,7 +128,7 @@ private:
   } logging_;
 
   // diagnostics
-  std::unique_ptr<autoware::universe_utils::DiagnosticsInterface> diagnostics_interface_ptr_;
+  std::unique_ptr<autoware_utils_diagnostics::DiagnosticsInterface> diagnostics_interface_ptr_;
   double delay_main_objects_tolerance_;
   double duration_empty_main_objects_tolerance_;
   double delay_sub_objects_tolerance_;
