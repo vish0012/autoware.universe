@@ -19,9 +19,9 @@
 #include "autoware/tracking_object_merger/utils/tracker_state.hpp"
 #include "autoware/tracking_object_merger/utils/utils.hpp"
 #include "autoware_utils_diagnostics/diagnostics_interface.hpp"
-#include "autoware_utils/ros/debug_publisher.hpp"
-#include "autoware_utils/ros/published_time_publisher.hpp"
-#include "autoware_utils/system/stop_watch.hpp"
+#include <autoware_utils_debug/debug_publisher.hpp>
+#include <autoware_utils_debug/published_time_publisher.hpp>
+#include <autoware_utils_system/stop_watch.hpp>
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -83,8 +83,8 @@ private:
   // debug object publisher
   rclcpp::Publisher<autoware_perception_msgs::msg::TrackedObjects>::SharedPtr debug_object_pub_;
   bool publish_interpolated_sub_objects_;
-  std::unique_ptr<autoware_utils::StopWatch<std::chrono::milliseconds>> stop_watch_ptr_;
-  std::unique_ptr<autoware_utils::DebugPublisher> processing_time_publisher_;
+  std::unique_ptr<autoware_utils_system::StopWatch<std::chrono::milliseconds>> stop_watch_ptr_;
+  std::unique_ptr<autoware_utils_debug::DebugPublisher> processing_time_publisher_;
 
   /* handle objects */
   std::unordered_map<MEASUREMENT_STATE, std::function<void(TrackedObject &, const TrackedObject &)>>
@@ -103,7 +103,7 @@ private:
   // tracker default settings
   TrackerStateParameter tracker_state_parameter_;
 
-  std::unique_ptr<autoware_utils::PublishedTimePublisher> published_time_publisher_;
+  std::unique_ptr<autoware_utils_debug::PublishedTimePublisher> published_time_publisher_;
 
   // merge policy (currently not used)
   struct
