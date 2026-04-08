@@ -580,7 +580,7 @@ void BboxObjectLocatorNode::roiCallback(
 
   // get transform from camera frame to target frame
   try {
-    transform_ = transform_listener_->getTransform(
+    transform_ = transform_listener_->get_transform(
       target_frame_, msg->header.frame_id, msg->header.stamp, rclcpp::Duration::from_seconds(0.01));
   } catch (const tf2::TransformException & ex) {
     RCLCPP_ERROR(get_logger(), "Failed to get transform: %s", ex.what());
