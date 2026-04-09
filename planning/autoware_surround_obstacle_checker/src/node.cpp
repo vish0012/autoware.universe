@@ -14,7 +14,7 @@
 
 #include "node.hpp"
 
-#include <autoware/universe_utils/geometry/geometry.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
 #include <autoware_utils/geometry/boost_polygon_utils.hpp>
 #include <autoware_utils/geometry/geometry.hpp>
 #include <autoware_utils/ros/update_param.hpp>
@@ -322,7 +322,7 @@ std::optional<StopObstacle> SurroundObstacleCheckerNode::getNearestObstacleByPoi
     // transform the nearest point from base_link to map frame
     const auto & pose = odometry_ptr_->pose.pose;
     const auto nearest_point_map =
-      autoware::universe_utils::transformPoint(nearest_point_base_link, pose);
+      autoware_utils_geometry::transform_point(nearest_point_base_link, pose);
 
     StopObstacle obstacle;
     obstacle.is_point_cloud = true;

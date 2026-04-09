@@ -18,10 +18,10 @@
 #include <autoware/interpolation/linear_interpolation.hpp>
 #include <autoware/motion_utils/trajectory/interpolation.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
-#include <autoware/universe_utils/geometry/boost_geometry.hpp>
-#include <autoware/universe_utils/geometry/boost_polygon_utils.hpp>
-#include <autoware/universe_utils/geometry/geometry.hpp>
-#include <autoware/universe_utils/math/normalization.hpp>
+#include <autoware_utils_geometry/boost_geometry.hpp>
+#include <autoware_utils_geometry/boost_polygon_utils.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
+#include <autoware_utils_math/normalization.hpp>
 #include <rclcpp/logger.hpp>
 #include <tf2/utils.hpp>
 
@@ -102,7 +102,7 @@ FootprintIntersection calculate_footprint_intersection(
   const auto obj_yaw = std::atan2(
     object_segment.second.y() - object_segment.first.y(),
     object_segment.second.x() - object_segment.first.x());
-  footprint_intersection.yaw_diff = autoware::universe_utils::normalizeRadian(ego_yaw - obj_yaw);
+  footprint_intersection.yaw_diff = autoware_utils_math::normalize_radian(ego_yaw - obj_yaw);
   footprint_intersection.ego_vel = interpolation::lerp(
     ego_traj_from.longitudinal_velocity_mps, ego_traj_to.longitudinal_velocity_mps,
     ego_segment_intersection_ratio);
@@ -175,7 +175,7 @@ std::optional<FootprintIntersection> calculate_end_point_intersection(
   const auto obj_segment_vector = object_segment.second - object_segment.first;
   const auto obj_yaw = std::atan2(obj_segment_vector.y(), obj_segment_vector.x());
   fi.yaw_diff =
-    autoware::universe_utils::normalizeRadian(tf2::getYaw(ego_point.pose.orientation) - obj_yaw);
+    autoware_utils_math::normalize_radian(tf2::getYaw(ego_point.pose.orientation) - obj_yaw);
   const auto obj_vel = boost::geometry::distance(ls[0], ls[1]) / ls_time_step;
   fi.ego_vel = ego_point.longitudinal_velocity_mps;
   fi.vel_diff = fi.ego_vel - obj_vel;

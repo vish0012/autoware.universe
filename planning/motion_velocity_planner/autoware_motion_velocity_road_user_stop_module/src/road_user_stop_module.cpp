@@ -26,11 +26,13 @@
 #include <autoware/motion_utils/trajectory/interpolation.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
 #include <autoware/planning_factor_interface/planning_factor_interface.hpp>
-#include <autoware/universe_utils/geometry/geometry.hpp>
-#include <autoware/universe_utils/ros/uuid_helper.hpp>
-#include <autoware/universe_utils/system/stop_watch.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
+#include <autoware_utils_math/normalization.hpp>
+#include <autoware_utils_uuid/uuid_helper.hpp>
+#include <autoware_utils_system/stop_watch.hpp>
 #include <autoware_utils_geometry/boost_polygon_utils.hpp>
 #include <autoware_utils_geometry/geometry.hpp>
+#include <autoware_utils_math/normalization.hpp>
 #include <autoware_utils_rclcpp/parameter.hpp>
 #include <autoware_utils_visualization/marker_helper.hpp>
 #include <pluginlib/class_list_macros.hpp>
@@ -140,7 +142,7 @@ void RoadUserStopModule::update_tracked_objects(
     if (!object_ptr) continue;
 
     const auto & predicted_object = object_ptr->predicted_object;
-    const std::string object_id = autoware::universe_utils::toHexString(predicted_object.object_id);
+    const std::string object_id = autoware_utils_uuid::to_hex_string(predicted_object.object_id);
 
     auto it = tracked_objects_.find(object_id);
     if (it != tracked_objects_.end()) {
@@ -347,7 +349,7 @@ std::vector<StopObstacle> RoadUserStopModule::filter_stop_obstacles(
         planner_data, object, traj_points, decimated_traj_points, decimated_traj_polygons,
         decimated_traj_polygons_no_margin, lanelet_data, current_time, dist_to_bumper)) {
       const std::string object_id =
-        autoware::universe_utils::toHexString(object->predicted_object.object_id);
+        autoware_utils_uuid::to_hex_string(object->predicted_object.object_id);
       current_object_ids.insert(object_id);
 
       // update stopped object tracking
@@ -387,7 +389,7 @@ std::vector<StopObstacle> RoadUserStopModule::filter_stop_obstacles(
   }
 
   for (const auto & prev_obstacle : prev_stop_obstacles_) {
-    const std::string object_id = autoware::universe_utils::toHexString(prev_obstacle.uuid);
+    const std::string object_id = autoware_utils_uuid::to_hex_string(prev_obstacle.uuid);
 
     // Check if object is still being tracked
     auto tracked_it = tracked_objects_.find(object_id);
@@ -411,7 +413,7 @@ std::vector<StopObstacle> RoadUserStopModule::filter_stop_obstacles(
     // Check if this object ID is not already in current stop_obstacles
     bool already_exists = false;
     for (const auto & current_obstacle : stop_obstacles) {
-      if (object_id == autoware::universe_utils::toHexString(current_obstacle.uuid)) {
+      if (object_id == autoware_utils_uuid::to_hex_string(current_obstacle.uuid)) {
         already_exists = true;
         break;
       }
@@ -551,7 +553,7 @@ bool RoadUserStopModule::is_object_on_road(
   auto object_polygon = autoware_utils_geometry::to_polygon2d(obj_pose, object.shape);
 
   // check if object was previously inside detection area for polygon expansion
-  const std::string object_id = autoware::universe_utils::toHexString(object.object_id);
+  const std::string object_id = autoware_utils_uuid::to_hex_string(object.object_id);
   auto tracked_it = tracked_objects_.find(object_id);
   double expansion_length = 0.0;
 
@@ -670,7 +672,7 @@ bool RoadUserStopModule::is_opposite_traffic_user(
 
   // calculate angle difference
   const double angle_diff =
-    std::abs(autoware::universe_utils::normalizeRadian(object_yaw - lanelet_yaw)) * 180.0 / M_PI;
+    std::abs(autoware_utils_math::normalize_radian(object_yaw - lanelet_yaw)) * 180.0 / M_PI;
 
   const bool is_opposing_traffic_user =
     angle_diff > param.obstacle_filtering.opposing_traffic_detection.angle_threshold;
@@ -947,7 +949,7 @@ std::optional<StopObstacle> RoadUserStopModule::pick_stop_obstacle_from_predicte
   const auto lanelet_map_ptr = planner_data->route_handler->getLaneletMapPtr();
 
   // check temporal filtering and get robust classification
-  const auto object_id_str = autoware::universe_utils::toHexString(predicted_object.object_id);
+  const auto object_id_str = autoware_utils_uuid::to_hex_string(predicted_object.object_id);
   if (!has_minimum_detection_duration(object_id_str, current_time)) {
     return std::nullopt;
   }
@@ -1096,7 +1098,7 @@ std::optional<Point> RoadUserStopModule::calc_stop_point(
   // update virtual wall position for the object in TrackedObject
   if (determined_stop_obstacle.has_value()) {
     const std::string object_id =
-      autoware::universe_utils::toHexString(determined_stop_obstacle.value().uuid);
+      autoware_utils_uuid::to_hex_string(determined_stop_obstacle.value().uuid);
     update_ego_reached_virtual_wall(
       object_id, stop_point, planner_data->current_odometry.pose.pose, clock_->now());
   }

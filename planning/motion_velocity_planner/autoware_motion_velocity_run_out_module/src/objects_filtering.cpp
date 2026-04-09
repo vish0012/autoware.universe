@@ -18,8 +18,8 @@
 #include "types.hpp"
 
 #include <autoware/motion_velocity_planner_common/planner_data.hpp>
-#include <autoware/universe_utils/geometry/geometry.hpp>
-#include <autoware/universe_utils/ros/uuid_helper.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
+#include <autoware_utils_uuid/uuid_helper.hpp>
 #include <autoware_utils_geometry/geometry.hpp>
 
 #include <autoware_perception_msgs/msg/detail/object_classification__struct.hpp>

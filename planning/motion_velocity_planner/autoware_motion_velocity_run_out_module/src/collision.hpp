@@ -18,7 +18,7 @@
 #include "parameters.hpp"
 #include "types.hpp"
 
-#include <autoware/universe_utils/geometry/geometry.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
 
 #include <autoware_planning_msgs/msg/trajectory_point.hpp>
 

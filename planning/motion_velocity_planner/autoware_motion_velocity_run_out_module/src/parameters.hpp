@@ -16,8 +16,8 @@
 #ifndef PARAMETERS_HPP_
 #define PARAMETERS_HPP_
 
-#include <autoware/universe_utils/ros/parameter.hpp>
-#include <autoware/universe_utils/ros/update_param.hpp>
+#include <autoware_utils_rclcpp/parameter.hpp>
+#include <autoware_utils_rclcpp/parameter.hpp>
 #include <rclcpp/node.hpp>
 #include <rclcpp/parameter.hpp>
 
