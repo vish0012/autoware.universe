@@ -41,9 +41,9 @@
 
 namespace autoware::image_object_locator
 {
-using autoware_utils_tf::TransformListener;
 using autoware_perception_msgs::msg::DetectedObject;
 using autoware_perception_msgs::msg::DetectedObjects;
+using autoware_utils_tf::TransformListener;
 using sensor_msgs::msg::CameraInfo;
 using tier4_perception_msgs::msg::DetectedObjectsWithFeature;
 using Label = autoware_perception_msgs::msg::ObjectClassification;

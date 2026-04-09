@@ -18,7 +18,6 @@
 #define AUTOWARE__TRACKING_OBJECT_MERGER__UTILS__UTILS_HPP_
 
 #include <autoware_utils_geometry/geometry.hpp>
-
 #include <rclcpp/rclcpp.hpp>
 #include <tf2/LinearMath/Quaternion.hpp>
 #include <tf2/LinearMath/Transform.hpp>

@@ -19,10 +19,10 @@
 #include "autoware/tracking_object_merger/utils/tracker_state.hpp"
 #include "autoware/tracking_object_merger/utils/utils.hpp"
 #include "autoware_utils_diagnostics/diagnostics_interface.hpp"
+
 #include <autoware_utils_debug/debug_publisher.hpp>
 #include <autoware_utils_debug/published_time_publisher.hpp>
 #include <autoware_utils_system/stop_watch.hpp>
-
 #include <rclcpp/rclcpp.hpp>
 
 #include "autoware_perception_msgs/msg/tracked_objects.hpp"

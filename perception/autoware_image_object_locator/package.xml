@@ -18,8 +18,8 @@
   <depend>autoware_object_recognition_utils</depend>
   <depend>autoware_perception_msgs</depend>
   <depend>autoware_utils_geometry</depend>
-  <depend>autoware_utils_tf</depend>
   <depend>autoware_utils_math</depend>
+  <depend>autoware_utils_tf</depend>
   <depend>libopencv-dev</depend>
   <depend>rclcpp_components</depend>
   <depend>sensor_msgs</depend>

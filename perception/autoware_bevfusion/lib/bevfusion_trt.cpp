@@ -47,8 +47,7 @@ BEVFusionTRT::BEVFusionTRT(
   CHECK_CUDA_ERROR(cudaStreamCreate(&stream_));
   vg_ptr_ = std::make_unique<VoxelGenerator>(densification_param, config_, stream_);
 
-  stop_watch_ptr_ =
-    std::make_unique<autoware_utils_system::StopWatch<std::chrono::milliseconds>>();
+  stop_watch_ptr_ = std::make_unique<autoware_utils_system::StopWatch<std::chrono::milliseconds>>();
   stop_watch_ptr_->tic("processing/inner");
 
   initPtr();

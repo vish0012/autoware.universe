@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "autoware/tracking_object_merger/utils/utils.hpp"
+
 #include <autoware_utils_math/normalization.hpp>
 
 #include "autoware_perception_msgs/msg/shape.hpp"
