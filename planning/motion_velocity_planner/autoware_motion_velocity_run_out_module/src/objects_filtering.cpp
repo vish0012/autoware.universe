@@ -81,13 +81,13 @@ void calculate_current_footprint(
 
 bool skip_object_condition(
   Object & object, const std::optional<DecisionHistory> & prev_decisions,
-  const universe_utils::Segment2d & ego_rear_segment, const FilteringData & filtering_data,
+  const autoware_utils_geometry::Segment2d & ego_rear_segment, const FilteringData & filtering_data,
   const Parameters & parameters)
 {
   constexpr auto skip_object = true;
   const auto rear_vector = ego_rear_segment.second - ego_rear_segment.first;
   // normal vector in the direction coming from the rear
-  const auto rear_normal = universe_utils::Point2d(-rear_vector.y(), rear_vector.x());
+  const auto rear_normal = autoware_utils_geometry::Point2d(-rear_vector.y(), rear_vector.x());
   const auto object_vector = object.position - ego_rear_segment.first;
   const auto is_behind_ego = rear_normal.dot(object_vector) < 0.0;
   const auto & params = parameters.object_parameters_per_label[object.label];
@@ -202,7 +202,7 @@ std::optional<size_t> get_cut_predicted_path_index(
     cut_segments_rtree.query(
       boost::geometry::index::intersects(segment), std::back_inserter(query_results));
     for (const auto & candidate : query_results) {
-      if (universe_utils::intersect(
+      if (autoware_utils_geometry::intersect(
             segment.first, segment.second, candidate.first.first, candidate.first.second)) {
         return true;
       }
@@ -213,7 +213,7 @@ std::optional<size_t> get_cut_predicted_path_index(
   for (const auto & corner : {front_left, front_right, rear_left, rear_right}) {
     const auto & ls = path.predicted_path_footprint.corner_linestrings[corner];
     for (auto i = 0UL; i + 1 < ls.size(); ++i) {
-      const auto & segment = universe_utils::Segment2d(ls[i], ls[i + 1]);
+      const auto & segment = autoware_utils_geometry::Segment2d(ls[i], ls[i + 1]);
       if (crosses_cut_line_in_map(segment)) {
         cut_index = std::min(cut_index.value_or(i), i);
         break;
@@ -234,7 +234,7 @@ size_t get_preserved_cut_index(
   double d = 0.0;
   const auto & ls = path.predicted_path_footprint.corner_linestrings[front_left];
   for (auto i = 0UL; i + 1 < ls.size(); ++i) {
-    const auto & segment = universe_utils::Segment2d(ls[i], ls[i + 1]);
+    const auto & segment = autoware_utils_geometry::Segment2d(ls[i], ls[i + 1]);
     t += path.time_step;
     d += static_cast<double>(boost::geometry::length(segment));
     if ((time == 0.0 || t >= time) && (distance == 0.0 || d >= distance)) {
@@ -285,9 +285,9 @@ std::vector<Object> prepare_dynamic_objects(
   for (const auto & object : objects) {
     Object filtered_object;
     filtered_object.object = object;
-    filtered_object.uuid = universe_utils::toHexString(object->predicted_object.object_id);
+    filtered_object.uuid = autoware_utils_uuid::to_hex_string(object->predicted_object.object_id);
     filtered_object.position =
-      universe_utils::fromMsg(
+      autoware_utils_geometry::from_msg(
         object->predicted_object.kinematics.initial_pose_with_covariance.pose.position)
         .to_2d();
     classify(filtered_object, object->predicted_object, target_labels, params);

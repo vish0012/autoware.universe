@@ -99,7 +99,7 @@ double calculate_keep_stop_distance_range(
       // we skip trajectory points where the predicted time decreases to avoid interpolation errors
       continue;
     }
-    const auto arc_length_delta = universe_utils::calcDistance2d(trajectory[i - 1], trajectory[i]);
+    const auto arc_length_delta = autoware_utils_geometry::calc_distance2d(trajectory[i - 1], trajectory[i]);
     times.push_back(t);
     arc_lengths.push_back(arc_lengths.back() + arc_length_delta);
   }

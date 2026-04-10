@@ -153,7 +153,7 @@ struct Parameters
     rclcpp::Node & node, const std::string & ns, const uint8_t object_label,
     const std::string & param)
   {
-    using universe_utils::getOrDeclareParameter;
+    using autoware_utils_rclcpp::get_or_declare_parameter;
     const auto label_str = ".objects." + label_to_string(object_label);
     try {
       return getOrDeclareParameter<T>(node, ns + label_str + param);
@@ -164,7 +164,7 @@ struct Parameters
   /// @brief Initialize the parameters
   void initialize(rclcpp::Node & node, const std::string & ns)
   {
-    using universe_utils::getOrDeclareParameter;
+    using autoware_utils_rclcpp::get_or_declare_parameter;
     const auto ignore_collisions_ns = ns + ".collision.ignore_conditions";
     ignore_collision_conditions.if_ego_arrives_first.enable =
       getOrDeclareParameter<bool>(node, ignore_collisions_ns + ".if_ego_arrives_first.enable");
@@ -286,7 +286,7 @@ struct Parameters
   /// @brief Update the parameters
   void update(const std::vector<rclcpp::Parameter> & params, const std::string & ns)
   {
-    using universe_utils::updateParam;
+    using autoware_utils_rclcpp::update_param;
     updateParam(
       params, ns + ".collision.ignore_conditions.if_ego_arrives_first.enable",
       ignore_collision_conditions.if_ego_arrives_first.enable);

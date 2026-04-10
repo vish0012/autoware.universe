@@ -40,7 +40,7 @@ void prepare_trajectory_footprint_rtree(TrajectoryCornerFootprint & footprint)
   for (const auto corner : {front_left, front_right, rear_left, rear_right}) {
     const auto & ls = footprint.predicted_path_footprint.corner_linestrings[corner];
     for (auto i = 0UL; i + 1 < ls.size(); ++i) {
-      nodes.emplace_back(universe_utils::Segment2d{ls[i], ls[i + 1]}, std::make_pair(corner, i));
+      nodes.emplace_back(autoware_utils_geometry::Segment2d{ls[i], ls[i + 1]}, std::make_pair(corner, i));
     }
   }
   const auto max_index = footprint.ego_trajectory.size() - 1UL;
@@ -61,7 +61,7 @@ TrajectoryCornerFootprint calculate_trajectory_corner_footprint(
   const auto base_footprint =
     vehicle_info.createFootprint(params.ego_lateral_margin, params.ego_longitudinal_margin);
   for (const auto & p : trajectory) {
-    const universe_utils::Point2d base_link(p.pose.position.x, p.pose.position.y);
+    const autoware_utils_geometry::Point2d base_link(p.pose.position.x, p.pose.position.y);
     const auto angle = tf2::getYaw(p.pose.orientation);
     const Eigen::Rotation2Dd rotation(angle);
     const auto rotated_front_left_offset =
@@ -84,13 +84,13 @@ TrajectoryCornerFootprint calculate_trajectory_corner_footprint(
     trajectory_footprint.max_longitudinal_offset = vehicle_info.max_longitudinal_offset_m;
   }
   for (auto i = 0UL; i + 1 < footprint.corner_linestrings[front_left].size(); ++i) {
-    universe_utils::LinearRing2d front_polygon = {
+    autoware_utils_geometry::LinearRing2d front_polygon = {
       footprint.corner_linestrings[front_left][i],
       footprint.corner_linestrings[front_left][i + 1],
       footprint.corner_linestrings[front_right][i + 1],
       footprint.corner_linestrings[front_right][i],
     };
-    universe_utils::LinearRing2d rear_polygon = {
+    autoware_utils_geometry::LinearRing2d rear_polygon = {
       footprint.corner_linestrings[rear_left][i],
       footprint.corner_linestrings[rear_left][i + 1],
       footprint.corner_linestrings[rear_right][i + 1],

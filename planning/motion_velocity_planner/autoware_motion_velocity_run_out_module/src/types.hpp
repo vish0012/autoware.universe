@@ -58,7 +58,7 @@ enum IntersectionPosition {
 /// @brief footprint represented by linestrings corresponding to the path of 4 footprint corners
 struct CornerFootprint
 {
-  std::vector<universe_utils::LineString2d> corner_linestrings{4};
+  std::vector<autoware_utils_geometry::LineString2d> corner_linestrings{4};
 
   [[nodiscard]] size_t size() const
   {
@@ -78,7 +78,7 @@ struct FootprintIntersection
 {
   double ego_time{};     // [s] time when ego is predicted to reach the intersection point
   double object_time{};  // [s] time when the object is predicted to reach the intersection point
-  universe_utils::Point2d intersection;  // intersection point
+  autoware_utils_geometry::Point2d intersection;  // intersection point
   IntersectionPosition position;  // intersection position relative to the ego trajectory footprint
   double arc_length{};            // [m] arc length of the intersection along the ego trajectory
   double yaw_diff{};  // [rad] yaw difference between ego and the object at the intersection
@@ -96,25 +96,25 @@ struct FootprintIntersections
 };
 
 namespace bgi = boost::geometry::index;
-using SegmentNode = std::pair<universe_utils::Segment2d, size_t>;
+using SegmentNode = std::pair<autoware_utils_geometry::Segment2d, size_t>;
 using SegmentRtree = bgi::rtree<SegmentNode, bgi::rstar<16>>;
-using PolygonNode = std::pair<universe_utils::Box2d, size_t>;
+using PolygonNode = std::pair<autoware_utils_geometry::Box2d, size_t>;
 class PolygonRtree : bgi::rtree<PolygonNode, bgi::rstar<16>>
 {
   static std::vector<PolygonNode> prepare_nodes(
-    const std::vector<universe_utils::LinearRing2d> & polygons)
+    const std::vector<autoware_utils_geometry::LinearRing2d> & polygons)
   {
     std::vector<PolygonNode> nodes;
     nodes.reserve(polygons.size());
     for (auto i = 0UL; i < polygons.size(); ++i) {
-      nodes.emplace_back(boost::geometry::return_envelope<universe_utils::Box2d>(polygons[i]), i);
+      nodes.emplace_back(boost::geometry::return_envelope<autoware_utils_geometry::Box2d>(polygons[i]), i);
     }
     return nodes;
   }
 
 public:
   PolygonRtree() = default;
-  explicit PolygonRtree(const std::vector<universe_utils::LinearRing2d> & polygons)
+  explicit PolygonRtree(const std::vector<autoware_utils_geometry::LinearRing2d> & polygons)
   : bgi::rtree<PolygonNode, bgi::rstar<16>>(PolygonRtree::prepare_nodes(polygons))
   {
   }
@@ -122,7 +122,7 @@ public:
   /// @brief check if the given geometry is disjoint from the polygons contained in the rtree
   template <class T>
   bool is_geometry_disjoint_from_rtree_polygons(
-    const T & geometry, const std::vector<universe_utils::LinearRing2d> & polygons) const
+    const T & geometry, const std::vector<autoware_utils_geometry::LinearRing2d> & polygons) const
   {
     std::vector<PolygonNode> query_results;
     query(!bgi::disjoint(geometry), std::back_inserter(query_results));
@@ -136,7 +136,7 @@ public:
   }
 };
 using FootprintSegmentNode =
-  std::pair<universe_utils::Segment2d, std::pair<IntersectionPosition, size_t>>;
+  std::pair<autoware_utils_geometry::Segment2d, std::pair<IntersectionPosition, size_t>>;
 using FootprintSegmentRtree = bgi::rtree<FootprintSegmentNode, bgi::rstar<16>>;
 
 /// @brief the corner footprint of the ego trajectory
@@ -144,9 +144,9 @@ struct TrajectoryCornerFootprint
 {
   CornerFootprint predicted_path_footprint;
   FootprintSegmentRtree segments_rtree;
-  std::vector<universe_utils::LinearRing2d>
+  std::vector<autoware_utils_geometry::LinearRing2d>
     front_polygons;  // polygons built from the front linestrings
-  std::vector<universe_utils::LinearRing2d>
+  std::vector<autoware_utils_geometry::LinearRing2d>
     rear_polygons;  // polygons built from the rear linestrings
   PolygonRtree front_polygons_rtree;
   PolygonRtree rear_polygons_rtree;
@@ -154,14 +154,14 @@ struct TrajectoryCornerFootprint
   std::vector<autoware_planning_msgs::msg::TrajectoryPoint> ego_trajectory;
 
   /// @brief get the rear footprint segment of the given index
-  [[nodiscard]] universe_utils::Segment2d get_rear_segment(const size_t index) const
+  [[nodiscard]] autoware_utils_geometry::Segment2d get_rear_segment(const size_t index) const
   {
     return {
       predicted_path_footprint.corner_linestrings[rear_left][index],
       predicted_path_footprint.corner_linestrings[rear_right][index]};
   }
   /// @brief get the front footprint segment of the given index
-  [[nodiscard]] universe_utils::Segment2d get_front_segment(const size_t index) const
+  [[nodiscard]] autoware_utils_geometry::Segment2d get_front_segment(const size_t index) const
   {
     return {
       predicted_path_footprint.corner_linestrings[front_left][index],
@@ -296,8 +296,8 @@ struct Object
   std::string uuid;
   std::vector<ObjectPredictedPathFootprint>
     predicted_path_footprints;  // footprint of each predicted path
-  universe_utils::Polygon2d current_footprint;
-  universe_utils::Point2d position;
+  autoware_utils_geometry::Polygon2d current_footprint;
+  autoware_utils_geometry::Point2d position;
   bool is_stopped = false;
   uint8_t label;
   bool has_target_label = false;
@@ -307,13 +307,13 @@ struct Object
 /// @brief data to filter predicted paths and collisions
 struct FilteringData
 {
-  std::vector<universe_utils::LinearRing2d> ignore_objects_polygons;
+  std::vector<autoware_utils_geometry::LinearRing2d> ignore_objects_polygons;
   PolygonRtree ignore_objects_rtree;
-  std::vector<universe_utils::LinearRing2d> ignore_collisions_polygons;
+  std::vector<autoware_utils_geometry::LinearRing2d> ignore_collisions_polygons;
   PolygonRtree ignore_collisions_rtree;
-  std::vector<universe_utils::Segment2d> cut_predicted_paths_segments;
+  std::vector<autoware_utils_geometry::Segment2d> cut_predicted_paths_segments;
   SegmentRtree cut_predicted_paths_rtree;
-  std::vector<universe_utils::Segment2d> strict_cut_predicted_paths_segments;
+  std::vector<autoware_utils_geometry::Segment2d> strict_cut_predicted_paths_segments;
   SegmentRtree strict_cut_predicted_paths_rtree;
 };
 using FilteringDataPerLabel = std::vector<FilteringData>;

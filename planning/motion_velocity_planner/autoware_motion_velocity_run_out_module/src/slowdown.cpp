@@ -54,7 +54,7 @@ geometry_msgs::msg::Point interpolated_point_at_time(
   const auto t_delta = next_time - prev_time;
   const auto t_diff = time - prev_time;
   const auto ratio = t_diff / t_delta;
-  return universe_utils::calcInterpolatedPoint(
+  return autoware_utils_geometry::calc_interpolated_point(
     prev_it->pose.position, std::next(prev_it)->pose.position, ratio);
 }
 

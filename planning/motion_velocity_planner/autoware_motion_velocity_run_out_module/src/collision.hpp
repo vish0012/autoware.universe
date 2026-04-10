@@ -55,8 +55,8 @@ struct TimeOverlapIntervalPair
 /// @param[in] object_segment_times The start and end times of the object segment.
 /// @return A FootprintIntersection struct containing information about the intersection.
 FootprintIntersection calculate_footprint_intersection(
-  const universe_utils::Segment2d & object_segment,
-  const universe_utils::Point2d & intersection_point, const FootprintSegmentNode & ego_query_result,
+  const autoware_utils_geometry::Segment2d & object_segment,
+  const autoware_utils_geometry::Point2d & intersection_point, const FootprintSegmentNode & ego_query_result,
   const std::vector<autoware_planning_msgs::msg::TrajectoryPoint> & ego_trajectory,
   const std::pair<double, double> object_segment_times);
 
@@ -69,7 +69,7 @@ FootprintIntersection calculate_footprint_intersection(
 std::pair<autoware_planning_msgs::msg::TrajectoryPoint, double>
 calculate_closest_interpolated_point_and_arc_length(
   const std::vector<autoware_planning_msgs::msg::TrajectoryPoint> & trajectory,
-  const universe_utils::Point2d & p, const double longitudinal_offset = 0.0);
+  const autoware_utils_geometry::Point2d & p, const double longitudinal_offset = 0.0);
 
 /// @brief Calculate the intersection between the end point of a linestring and the ego vehicle's
 /// trajectory footprint
@@ -80,7 +80,7 @@ calculate_closest_interpolated_point_and_arc_length(
 /// @param[in] check_front If true, the first point of the linestring is checked, otherwise the last
 /// point is checked
 std::optional<FootprintIntersection> calculate_end_point_intersection(
-  const universe_utils::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
+  const autoware_utils_geometry::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
   const double ls_time_step, const bool check_front);
 
 /// @brief Calculates intersections between a predicted object's corner linestring and the ego
@@ -91,7 +91,7 @@ std::optional<FootprintIntersection> calculate_end_point_intersection(
 /// @param[in] ls_time_step The time step of the predicted object's linestring.
 /// @return A vector of footprint intersections.
 std::vector<FootprintIntersection> calculate_intersections(
-  const universe_utils::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
+  const autoware_utils_geometry::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
   const double ls_time_step);
 
 /// @brief group the intersections into overlap intervals of increasing object time

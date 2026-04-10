@@ -38,7 +38,7 @@
 namespace autoware::motion_velocity_planner::run_out
 {
 template <class T>
-universe_utils::Segment2d convert(const lanelet::Segment<T> & segment)
+autoware_utils_geometry::Segment2d convert(const lanelet::Segment<T> & segment)
 {
   return {{segment.first.x(), segment.first.y()}, {segment.second.x(), segment.second.y()}};
 }

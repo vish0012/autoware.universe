@@ -47,29 +47,29 @@ inline MarkerArray make_debug_ego_footprint_markers(const run_out::TrajectoryCor
   Marker m;
   m.header.frame_id = "map";
   m.type = Marker::LINE_STRIP;
-  m.color = universe_utils::createMarkerColor(0.0, 1.0, 0.0, 1.0);
+  m.color = autoware_utils_visualization::create_marker_color(0.0, 1.0, 0.0, 1.0);
   m.scale.x = 0.2;
   m.ns = "ego_footprint_front_left";
   for (const auto & p : ego.predicted_path_footprint.corner_linestrings[front_left]) {
-    m.points.push_back(universe_utils::createPoint(p.x(), p.y(), 0.0));
+    m.points.push_back(autoware_utils_geometry::create_point(p.x(), p.y(), 0.0));
   }
   markers.markers.push_back(m);
   m.ns = "ego_footprint_front_right";
   m.points.clear();
   for (const auto & p : ego.predicted_path_footprint.corner_linestrings[front_right]) {
-    m.points.push_back(universe_utils::createPoint(p.x(), p.y(), 0.0));
+    m.points.push_back(autoware_utils_geometry::create_point(p.x(), p.y(), 0.0));
   }
   markers.markers.push_back(m);
   m.ns = "ego_footprint_rear_right";
   m.points.clear();
   for (const auto & p : ego.predicted_path_footprint.corner_linestrings[rear_right]) {
-    m.points.push_back(universe_utils::createPoint(p.x(), p.y(), 0.0));
+    m.points.push_back(autoware_utils_geometry::create_point(p.x(), p.y(), 0.0));
   }
   markers.markers.push_back(m);
   m.ns = "ego_footprint_rear_left";
   m.points.clear();
   for (const auto & p : ego.predicted_path_footprint.corner_linestrings[rear_left]) {
-    m.points.push_back(universe_utils::createPoint(p.x(), p.y(), 0.0));
+    m.points.push_back(autoware_utils_geometry::create_point(p.x(), p.y(), 0.0));
   }
   markers.markers.push_back(m);
   return markers;
@@ -82,7 +82,7 @@ inline MarkerArray make_debug_objects_footprint_markers(
   Marker m;
   m.header.frame_id = "map";
   m.type = Marker::LINE_STRIP;
-  m.color = universe_utils::createMarkerColor(0.0, 1.0, 0.0, 1.0);
+  m.color = autoware_utils_visualization::create_marker_color(0.0, 1.0, 0.0, 1.0);
   m.scale.x = 0.2;
   m.type = Marker::LINE_LIST;
   m.ns = "objects_footprints";
@@ -92,32 +92,32 @@ inline MarkerArray make_debug_objects_footprint_markers(
       const auto & f = footprint.predicted_path_footprint;
       for (auto i = 0UL; i + 1 < f.corner_linestrings[front_left].size(); ++i) {
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[front_left][i].x(), f.corner_linestrings[front_left][i].y(), 0.0));
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[front_left][i + 1].x(),
             f.corner_linestrings[front_left][i + 1].y(), 0.0));
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[front_right][i].x(), f.corner_linestrings[front_right][i].y(),
             0.0));
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[front_right][i + 1].x(),
             f.corner_linestrings[front_right][i + 1].y(), 0.0));
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[rear_left][i].x(), f.corner_linestrings[rear_left][i].y(), 0.0));
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[rear_left][i + 1].x(), f.corner_linestrings[rear_left][i + 1].y(),
             0.0));
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[rear_right][i].x(), f.corner_linestrings[rear_right][i].y(), 0.0));
         m.points.push_back(
-          universe_utils::createPoint(
+          autoware_utils_geometry::create_point(
             f.corner_linestrings[rear_right][i + 1].x(),
             f.corner_linestrings[rear_right][i + 1].y(), 0.0));
       }
@@ -134,8 +134,8 @@ inline MarkerArray make_debug_collisions_markers(const std::vector<Object> & obj
   m.header.frame_id = "base_link";
   m.ns = "collisions_table";
   m.type = Marker::TEXT_VIEW_FACING;
-  m.color = universe_utils::createMarkerColor(1.0, 1.0, 0.0, 0.75);
-  m.scale = universe_utils::createMarkerScale(0.1, 0.0, 0.5);
+  m.color = autoware_utils_visualization::create_marker_color(1.0, 1.0, 0.0, 0.75);
+  m.scale = autoware_utils_visualization::create_marker_scale(0.1, 0.0, 0.5);
   std::stringstream ss;
   ss << std::setprecision(4);
   ss << std::fixed;
@@ -170,8 +170,8 @@ inline MarkerArray make_debug_collisions_markers(const std::vector<Object> & obj
   m.ns = "collisions_points";
   m.header.frame_id = "map";
   m.type = Marker::POINTS;
-  m.color = universe_utils::createMarkerColor(1.0, 0.0, 0.0, 0.75);
-  m.scale = universe_utils::createMarkerScale(0.5, 0.5, 0.5);
+  m.color = autoware_utils_visualization::create_marker_color(1.0, 0.0, 0.0, 0.75);
+  m.scale = autoware_utils_visualization::create_marker_scale(0.5, 0.5, 0.5);
   for (const auto & o : objects) {
     for (const auto & c : o.collisions) {
       for (const auto & p : {
@@ -180,7 +180,7 @@ inline MarkerArray make_debug_collisions_markers(const std::vector<Object> & obj
              c.ego_time_interval.first_intersection.intersection,
              c.ego_time_interval.last_intersection.intersection,
            }) {
-        m.points.push_back(universe_utils::createPoint(p.x(), p.y(), 0.0));
+        m.points.push_back(autoware_utils_geometry::create_point(p.x(), p.y(), 0.0));
       }
     }
   }
@@ -222,8 +222,8 @@ inline MarkerArray make_debug_decisions_markers(const ObjectDecisionsTracker & d
   m.ns = "decisions";
   m.pose.position.x = 10.0;
   m.type = Marker::TEXT_VIEW_FACING;
-  m.color = universe_utils::createMarkerColor(1.0, 1.0, 0.0, 0.75);
-  m.scale = universe_utils::createMarkerScale(0.1, 0.0, 0.5);
+  m.color = autoware_utils_visualization::create_marker_color(1.0, 1.0, 0.0, 0.75);
+  m.scale = autoware_utils_visualization::create_marker_scale(0.1, 0.0, 0.5);
   std::stringstream ss;
   ss << std::setprecision(2);
   ss << std::fixed;
@@ -286,8 +286,8 @@ inline MarkerArray make_debug_min_stop_marker(
   m.header.frame_id = "map";
   m.ns = "min_stop";
   m.type = Marker::SPHERE;
-  m.color = universe_utils::createMarkerColor(1.0, 0.0, 0.0, 0.75);
-  m.scale = universe_utils::createMarkerScale(0.5, 0.5, 0.5);
+  m.color = autoware_utils_visualization::create_marker_color(1.0, 0.0, 0.0, 0.75);
+  m.scale = autoware_utils_visualization::create_marker_scale(0.5, 0.5, 0.5);
 
   const auto it_after_time = std::find_if(
     trajectory.begin(), trajectory.end(),
@@ -303,7 +303,7 @@ inline MarkerArray make_debug_min_stop_marker(
                          .seconds();
     const auto diff = time_to_stop - rclcpp::Duration(it_before_time->time_from_start).seconds();
     const auto ratio = diff / delta;
-    m.pose = universe_utils::calcInterpolatedPose(it_before_time->pose, it_after_time->pose, ratio);
+    m.pose = autoware_utils_geometry::calc_interpolated_pose(it_before_time->pose, it_after_time->pose, ratio);
   }
   markers.markers.push_back(m);
   return markers;
@@ -316,8 +316,8 @@ inline MarkerArray make_debug_filtering_data_marker(const FilteringData & data)
   m.header.frame_id = "map";
   m.ns = "filtering_data_cut_predicted_paths";
   m.type = Marker::LINE_LIST;
-  m.color = universe_utils::createMarkerColor(1.0, 0.0, 0.0, 0.75);
-  m.scale = universe_utils::createMarkerScale(0.2, 0.2, 0.2);
+  m.color = autoware_utils_visualization::create_marker_color(1.0, 0.0, 0.0, 0.75);
+  m.scale = autoware_utils_visualization::create_marker_scale(0.2, 0.2, 0.2);
   geometry_msgs::msg::Point p;
   for (const auto & segment : data.cut_predicted_paths_segments) {
     p.x = segment.first.x();
@@ -331,8 +331,8 @@ inline MarkerArray make_debug_filtering_data_marker(const FilteringData & data)
   m.ns = "filtering_data_strict_cut_predicted_paths";
   m.points.clear();
   m.type = Marker::LINE_LIST;
-  m.color = universe_utils::createMarkerColor(1.0, 1.0, 0.0, 0.75);
-  m.scale = universe_utils::createMarkerScale(0.2, 0.2, 0.2);
+  m.color = autoware_utils_visualization::create_marker_color(1.0, 1.0, 0.0, 0.75);
+  m.scale = autoware_utils_visualization::create_marker_scale(0.2, 0.2, 0.2);
   for (const auto & segment : data.strict_cut_predicted_paths_segments) {
     p.x = segment.first.x();
     p.y = segment.first.y();
@@ -344,7 +344,7 @@ inline MarkerArray make_debug_filtering_data_marker(const FilteringData & data)
   markers.markers.push_back(m);
   m.ns = "filtering_data_ignore_objects";
   m.points.clear();
-  m.color = universe_utils::createMarkerColor(0.0, 0.0, 1.0, 0.75);
+  m.color = autoware_utils_visualization::create_marker_color(0.0, 0.0, 1.0, 0.75);
   for (const auto & poly : data.ignore_objects_polygons) {
     for (auto i = 0UL; i + 1 < poly.size(); ++i) {
       p.x = poly[i].x();
@@ -358,7 +358,7 @@ inline MarkerArray make_debug_filtering_data_marker(const FilteringData & data)
   markers.markers.push_back(m);
   m.ns = "filtering_data_ignore_collisions";
   m.points.clear();
-  m.color = universe_utils::createMarkerColor(0.0, 1.0, 0.0, 0.75);
+  m.color = autoware_utils_visualization::create_marker_color(0.0, 1.0, 0.0, 0.75);
   for (const auto & poly : data.ignore_collisions_polygons) {
     for (auto i = 0UL; i + 1 < poly.size(); ++i) {
       p.x = poly[i].x();
