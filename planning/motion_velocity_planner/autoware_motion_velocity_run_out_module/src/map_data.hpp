@@ -19,7 +19,7 @@
 #include "types.hpp"
 
 #include <autoware/motion_velocity_planner_common/planner_data.hpp>
-#include <autoware_utils_geometry/boost_geometry.hpp>
+#include <autoware/universe_utils/geometry/boost_geometry.hpp>
 
 #include <autoware_planning_msgs/msg/trajectory_point.hpp>
 
@@ -38,7 +38,7 @@
 namespace autoware::motion_velocity_planner::run_out
 {
 template <class T>
-autoware_utils_geometry::Segment2d convert(const lanelet::Segment<T> & segment)
+universe_utils::Segment2d convert(const lanelet::Segment<T> & segment)
 {
   return {{segment.first.x(), segment.first.y()}, {segment.second.x(), segment.second.y()}};
 }

@@ -27,7 +27,7 @@
 #include <autoware/interpolation/linear_interpolation.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
 #include <autoware/objects_of_interest_marker_interface/marker_data.hpp>
-#include <autoware_utils_geometry/geometry.hpp>
+#include <autoware/universe_utils/geometry/geometry.hpp>
 #include <autoware_utils/ros/published_time_publisher.hpp>
 #include <rclcpp/duration.hpp>
 
@@ -71,9 +71,9 @@ void RunOutModule::init(rclcpp::Node & node, const std::string & module_name)
     node.create_publisher<visualization_msgs::msg::MarkerArray>("~/" + ns_ + "/virtual_walls", 1);
   debug_trajectory_publisher_ = node.create_publisher<autoware_planning_msgs::msg::Trajectory>(
     "~/debug/" + ns_ + "/trajectory", 1);
-  timekeeper_publisher_ = node.create_publisher<autoware_utils_debug::ProcessingTimeDetail>(
+  timekeeper_publisher_ = node.create_publisher<autoware::universe_utils::ProcessingTimeDetail>(
     "~/" + ns_ + "/processing_time_detail_ms", 1);
-  time_keeper_ = std::make_shared<autoware_utils_debug::TimeKeeper>(timekeeper_publisher_);
+  time_keeper_ = std::make_shared<autoware::universe_utils::TimeKeeper>(timekeeper_publisher_);
 
   init_parameters(node);
   diagnostic_updater_->setHardwareID("run_out");
@@ -99,7 +99,7 @@ double calculate_keep_stop_distance_range(
       // we skip trajectory points where the predicted time decreases to avoid interpolation errors
       continue;
     }
-    const auto arc_length_delta = autoware_utils_geometry::calc_distance2d(trajectory[i - 1], trajectory[i]);
+    const auto arc_length_delta = universe_utils::calcDistance2d(trajectory[i - 1], trajectory[i]);
     times.push_back(t);
     arc_lengths.push_back(arc_lengths.back() + arc_length_delta);
   }

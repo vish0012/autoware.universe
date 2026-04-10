@@ -21,7 +21,7 @@
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
 #include <autoware/motion_velocity_planner_common/planner_data.hpp>
 #include <autoware/motion_velocity_planner_common/velocity_planning_result.hpp>
-#include <autoware_utils_geometry/geometry.hpp>
+#include <autoware/universe_utils/geometry/geometry.hpp>
 
 #include <autoware_planning_msgs/msg/trajectory_point.hpp>
 #include <geometry_msgs/msg/point.hpp>
@@ -54,7 +54,7 @@ geometry_msgs::msg::Point interpolated_point_at_time(
   const auto t_delta = next_time - prev_time;
   const auto t_diff = time - prev_time;
   const auto ratio = t_diff / t_delta;
-  return autoware_utils_geometry::calc_interpolated_point(
+  return universe_utils::calcInterpolatedPoint(
     prev_it->pose.position, std::next(prev_it)->pose.position, ratio);
 }
 

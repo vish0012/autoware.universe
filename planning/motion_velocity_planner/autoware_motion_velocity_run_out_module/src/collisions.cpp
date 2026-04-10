@@ -18,10 +18,10 @@
 #include <autoware/interpolation/linear_interpolation.hpp>
 #include <autoware/motion_utils/trajectory/interpolation.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
-#include <autoware_utils_geometry/boost_geometry.hpp>
-#include <autoware_utils_geometry/boost_polygon_utils.hpp>
-#include <autoware_utils_geometry/geometry.hpp>
-#include <autoware_utils_math/normalization.hpp>
+#include <autoware/universe_utils/geometry/boost_geometry.hpp>
+#include <autoware/universe_utils/geometry/boost_polygon_utils.hpp>
+#include <autoware/universe_utils/geometry/geometry.hpp>
+#include <autoware/universe_utils/math/normalization.hpp>
 #include <rclcpp/logger.hpp>
 #include <tf2/utils.hpp>
 
@@ -61,8 +61,8 @@ bool is_opposite_direction(const TimeOverlapInterval & ego, const Parameters & p
 }  // namespace
 
 FootprintIntersection calculate_footprint_intersection(
-  const autoware_utils_geometry::Segment2d & object_segment,
-  const autoware_utils_geometry::Point2d & intersection_point, const FootprintSegmentNode & ego_query_result,
+  const universe_utils::Segment2d & object_segment,
+  const universe_utils::Point2d & intersection_point, const FootprintSegmentNode & ego_query_result,
   const std::vector<autoware_planning_msgs::msg::TrajectoryPoint> & ego_trajectory,
   const std::pair<double, double> object_segment_times)
 {
@@ -85,7 +85,7 @@ FootprintIntersection calculate_footprint_intersection(
       : 0.0;
   const auto ego_segment_length = static_cast<double>(boost::geometry::length(ego_segment));
   const auto ego_segment_offset =
-    autoware_utils_geometry::calc_distance2d(ego_segment.first, intersection_point);
+    universe_utils::calcDistance2d(ego_segment.first, intersection_point);
   geometry_msgs::msg::Point p;
   p.x = intersection_point.x();
   p.y = intersection_point.y();
@@ -102,7 +102,7 @@ FootprintIntersection calculate_footprint_intersection(
   const auto obj_yaw = std::atan2(
     object_segment.second.y() - object_segment.first.y(),
     object_segment.second.x() - object_segment.first.x());
-  footprint_intersection.yaw_diff = autoware_utils_math::normalize_radian(ego_yaw - obj_yaw);
+  footprint_intersection.yaw_diff = autoware::universe_utils::normalizeRadian(ego_yaw - obj_yaw);
   footprint_intersection.ego_vel = interpolation::lerp(
     ego_traj_from.longitudinal_velocity_mps, ego_traj_to.longitudinal_velocity_mps,
     ego_segment_intersection_ratio);
@@ -117,7 +117,7 @@ FootprintIntersection calculate_footprint_intersection(
 std::pair<autoware_planning_msgs::msg::TrajectoryPoint, double>
 calculate_closest_interpolated_point_and_arc_length(
   const std::vector<autoware_planning_msgs::msg::TrajectoryPoint> & trajectory,
-  const autoware_utils_geometry::Point2d & p, const double longitudinal_offset = 0.0)
+  const universe_utils::Point2d & p, const double longitudinal_offset = 0.0)
 {
   autoware_planning_msgs::msg::TrajectoryPoint trajectory_point;
   geometry_msgs::msg::Point pt;
@@ -129,8 +129,8 @@ calculate_closest_interpolated_point_and_arc_length(
   trajectory_point.pose = pose;
   const auto segment_idx = motion_utils::findNearestSegmentIndex(trajectory, pose.position);
   const auto segment_length =
-    autoware_utils_geometry::calc_distance2d(trajectory[segment_idx], trajectory[segment_idx + 1]);
-  const auto point_distance = autoware_utils_geometry::calc_distance2d(trajectory[segment_idx], pose);
+    universe_utils::calcDistance2d(trajectory[segment_idx], trajectory[segment_idx + 1]);
+  const auto point_distance = universe_utils::calcDistance2d(trajectory[segment_idx], pose);
   trajectory_point.time_from_start = rclcpp::Duration::from_seconds(
     interpolation::lerp(
       rclcpp::Duration(trajectory[segment_idx].time_from_start).seconds(),
@@ -143,7 +143,7 @@ calculate_closest_interpolated_point_and_arc_length(
 }
 
 std::optional<FootprintIntersection> calculate_end_point_intersection(
-  const autoware_utils_geometry::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
+  const universe_utils::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
   const double ls_time_step, const bool check_front)
 {
   const auto & end_point = check_front ? ls.front() : ls.back();
@@ -162,7 +162,7 @@ std::optional<FootprintIntersection> calculate_end_point_intersection(
     footprint.ego_trajectory, fi.intersection, footprint.max_longitudinal_offset);
   fi.arc_length = arc_length;
   fi.ego_time = rclcpp::Duration(ego_point.time_from_start).seconds();
-  autoware_utils_geometry::Segment2d object_segment;
+  universe_utils::Segment2d object_segment;
   if (check_front) {
     object_segment.first = ls.front();
     object_segment.second = ls[1];
@@ -175,7 +175,7 @@ std::optional<FootprintIntersection> calculate_end_point_intersection(
   const auto obj_segment_vector = object_segment.second - object_segment.first;
   const auto obj_yaw = std::atan2(obj_segment_vector.y(), obj_segment_vector.x());
   fi.yaw_diff =
-    autoware_utils_math::normalize_radian(tf2::getYaw(ego_point.pose.orientation) - obj_yaw);
+    autoware::universe_utils::normalizeRadian(tf2::getYaw(ego_point.pose.orientation) - obj_yaw);
   const auto obj_vel = boost::geometry::distance(ls[0], ls[1]) / ls_time_step;
   fi.ego_vel = ego_point.longitudinal_velocity_mps;
   fi.vel_diff = fi.ego_vel - obj_vel;
@@ -190,7 +190,7 @@ std::optional<FootprintIntersection> calculate_end_point_intersection(
 }
 
 std::vector<FootprintIntersection> calculate_intersections(
-  const autoware_utils_geometry::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
+  const universe_utils::LineString2d & ls, const TrajectoryCornerFootprint & footprint,
   const double ls_time_step)
 {
   std::vector<FootprintIntersection> intersections;
@@ -203,14 +203,14 @@ std::vector<FootprintIntersection> calculate_intersections(
     intersections.push_back(*first_intersection);
   }
   for (auto i = 0UL; i + 1 < ls.size(); ++i) {
-    autoware_utils_geometry::Segment2d segment;
+    universe_utils::Segment2d segment;
     segment.first = ls[i];
     segment.second = ls[i + 1];
     std::vector<FootprintSegmentNode> query_results;
     footprint.segments_rtree.query(
       boost::geometry::index::intersects(segment), std::back_inserter(query_results));
     for (const auto & query_result : query_results) {
-      const auto intersection = autoware_utils_geometry::intersect(
+      const auto intersection = universe_utils::intersect(
         segment.first, segment.second, query_result.first.first, query_result.first.second);
       if (intersection) {
         const auto footprint_intersection = calculate_footprint_intersection(
