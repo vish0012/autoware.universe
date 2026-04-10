@@ -23,8 +23,6 @@
 #include "autoware/behavior_path_start_planner_module/pull_out_path.hpp"
 #include "autoware/behavior_path_start_planner_module/util.hpp"
 #include "autoware/motion_utils/trajectory/path_with_lane_id.hpp"
-#include <autoware_utils_geometry/geometry.hpp>
-#include <autoware_utils_math/normalization.hpp>
 #include "autoware_utils/geometry/boost_polygon_utils.hpp"
 
 #include <autoware/interpolation/linear_interpolation.hpp>
@@ -32,6 +30,8 @@
 #include <autoware/motion_utils/trajectory/path_shift.hpp>
 #include <autoware_utils/geometry/geometry.hpp>
 #include <autoware_utils/math/unit_conversion.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
+#include <autoware_utils_math/normalization.hpp>
 #include <tf2/LinearMath/Quaternion.hpp>
 #include <tf2/utils.hpp>
 
@@ -57,9 +57,9 @@ using autoware_utils::calc_distance2d;
 using autoware_utils::calc_offset_pose;
 namespace autoware::behavior_path_planner
 {
-using autoware_utils_math::normalize_radian;
 using autoware_utils::deg2rad;
 using autoware_utils::rad2deg;
+using autoware_utils_math::normalize_radian;
 using start_planner_utils::get_lane_ids_from_pose;
 using start_planner_utils::getPullOutLanes;
 using start_planner_utils::set_lane_ids_to_path_point;

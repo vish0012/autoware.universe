@@ -14,12 +14,12 @@
 
 #include "node.hpp"
 
-#include <autoware_utils_geometry/geometry.hpp>
 #include <autoware_utils/geometry/boost_polygon_utils.hpp>
 #include <autoware_utils/geometry/geometry.hpp>
 #include <autoware_utils/ros/update_param.hpp>
 #include <autoware_utils/system/stop_watch.hpp>
 #include <autoware_utils/transform/transforms.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
 #include <tf2_eigen/tf2_eigen.hpp>
 
 #include <boost/assert.hpp>

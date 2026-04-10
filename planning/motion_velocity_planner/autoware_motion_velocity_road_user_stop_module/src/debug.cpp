@@ -14,8 +14,8 @@
 
 #include "road_user_stop_module.hpp"
 
-#include <autoware_utils_visualization/marker_helper.hpp>
 #include <autoware_lanelet2_extension/visualization/visualization.hpp>
+#include <autoware_utils_visualization/marker_helper.hpp>
 
 #include <std_msgs/msg/color_rgba.hpp>
 

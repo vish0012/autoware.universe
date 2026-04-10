@@ -18,6 +18,7 @@
 #include "autoware/behavior_path_bidirectional_traffic_module/parameter.hpp"
 #include "autoware/trajectory/pose.hpp"
 #include "autoware/trajectory/utils/find_intervals.hpp"
+
 #include <autoware_utils_geometry/boost_geometry.hpp>
 
 #include <autoware_internal_planning_msgs/msg/path_point_with_lane_id.hpp>

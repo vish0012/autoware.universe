@@ -15,9 +15,8 @@
 #ifndef AUTOWARE__BEHAVIOR_PATH_BIDIRECTIONAL_TRAFFIC_MODULE__PARAMETER_HPP_
 #define AUTOWARE__BEHAVIOR_PATH_BIDIRECTIONAL_TRAFFIC_MODULE__PARAMETER_HPP_
 
-#include <autoware_utils_geometry/boost_geometry.hpp>
-
 #include <autoware/behavior_path_planner_common/data_manager.hpp>
+#include <autoware_utils_geometry/boost_geometry.hpp>
 #include <rclcpp/node.hpp>
 
 #include <geometry_msgs/msg/pose.hpp>

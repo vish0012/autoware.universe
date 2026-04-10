@@ -26,14 +26,12 @@
 #include <autoware/motion_utils/trajectory/interpolation.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
 #include <autoware/planning_factor_interface/planning_factor_interface.hpp>
-#include <autoware_utils_geometry/geometry.hpp>
-#include <autoware_utils_math/normalization.hpp>
-#include <autoware_utils_uuid/uuid_helper.hpp>
-#include <autoware_utils_system/stop_watch.hpp>
 #include <autoware_utils_geometry/boost_polygon_utils.hpp>
 #include <autoware_utils_geometry/geometry.hpp>
 #include <autoware_utils_math/normalization.hpp>
 #include <autoware_utils_rclcpp/parameter.hpp>
+#include <autoware_utils_system/stop_watch.hpp>
+#include <autoware_utils_uuid/uuid_helper.hpp>
 #include <autoware_utils_visualization/marker_helper.hpp>
 #include <pluginlib/class_list_macros.hpp>
 #include <tf2/utils.hpp>
