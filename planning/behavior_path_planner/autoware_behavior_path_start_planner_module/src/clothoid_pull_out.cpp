@@ -96,7 +96,7 @@ std::vector<geometry_msgs::msg::Point> correct_clothoid_by_rigid_transform(
   const double target_angle = std::atan2(target_dy, target_dx);
   double rotation_angle = target_angle - clothoid_angle;
 
-  rotation_angle = normalizeRadian(rotation_angle);
+  rotation_angle = normalize_radian(rotation_angle);
 
   // Choose shorter rotation if over 180 degrees
   if (std::abs(rotation_angle) > M_PI) {
