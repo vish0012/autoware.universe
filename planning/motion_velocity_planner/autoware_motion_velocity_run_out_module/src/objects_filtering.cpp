@@ -74,7 +74,7 @@ void calculate_current_footprint(
   Object & object, const autoware_perception_msgs::msg::PredictedObject & predicted_object)
 {
   const auto half_length = predicted_object.shape.dimensions.x * 0.5;
-  object.current_footprint = autoware_utils::to_footprint(
+  object.current_footprint = autoware_utils_geometry::to_footprint(
     predicted_object.kinematics.initial_pose_with_covariance.pose, half_length, half_length,
     predicted_object.shape.dimensions.y);
 }
@@ -163,7 +163,7 @@ void calculate_predicted_path_footprints(
     ObjectPredictedPathFootprint footprint;
     footprint.time_step = rclcpp::Duration(path.time_step).seconds();
     for (const auto & p : path.path) {
-      const auto object_polygon = autoware_utils::to_footprint(p, half_length, half_length, width);
+      const auto object_polygon = autoware_utils_geometry::to_footprint(p, half_length, half_length, width);
       footprint.predicted_path_footprint.corner_linestrings[front_left].push_back(
         object_polygon.outer()[0]);
       footprint.predicted_path_footprint.corner_linestrings[front_right].push_back(

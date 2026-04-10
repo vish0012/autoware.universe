@@ -693,7 +693,7 @@ lanelet::ConstLanelets RoadUserStopModule::get_ego_lanelets(
     trajectory_ls.emplace_back(p.pose.position.x, p.pose.position.y);
   }
   // add a point beyond the last trajectory point to account for the ego front offset
-  const auto pose_beyond = autoware_utils::calc_offset_pose(
+  const auto pose_beyond = autoware_utils_geometry::calc_offset_pose(
     smoothed_trajectory_points.back().pose, vehicle_info.max_longitudinal_offset_m, 0.0, 0.0, 0.0);
   trajectory_ls.emplace_back(pose_beyond.position.x, pose_beyond.position.y);
   // calculate the lanelets overlapped by the trajectory
